@@ -8,4 +8,4 @@ https://www.freecodecamp.org/news/build-portfolio-website-react/
 Some debugging due to outdated tutorial mostly with tailwind and heroicons \
 Mostly Javascript alittle react \
 Learnt about tailwind css \
-Going to deploy on Netify for now will move to github pages in the future \
+Going to deploy on Netify for now will move to github pages in the future
