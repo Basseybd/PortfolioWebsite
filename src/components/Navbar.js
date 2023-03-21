@@ -17,7 +17,14 @@ export default function Navbar() {
           <a href="#skills" className="mr-5 hover:text-white">
             Skills
           </a>
+          <a
+            href=" https://drive.google.com/file/d/1V0Pcesoezl7YAl4xlAHAi9uAatv5o8lq/view?usp=sharing"
+            className="mr-5 hover:text-white"
+          >
+            My Resume
+          </a>
         </nav>
+
         <a
           href="#contact"
           className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
