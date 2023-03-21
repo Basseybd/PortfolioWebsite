@@ -1,14 +1,13 @@
 export const projects = [
   {
     title: "React Task Tracker",
-    description:
-      "React app that deals with  props, useStates, useEffects and routering",
+    description: "React app that deals with props, useStates, useEffects and routering.",
     image: "./reminder-app.gif",
     link: "https://github.com/Basseybd/react-task-tracker",
   },
   {
     title: "React Book List",
-    description: "Basic use of React Components",
+    description: "Basic use of React Components to make an list of amazon books.",
     image: "./react-amazon-book-list.png",
     link: "https://github.com/Basseybd/react-book-list",
   },
