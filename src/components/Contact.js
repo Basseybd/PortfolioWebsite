@@ -1,4 +1,5 @@
 import React from "react";
+import { NetlifyForm, Honeypot } from "react-netlify-forms";
 
 export default function Contact() {
   const [name, setName] = React.useState("");
@@ -14,6 +15,7 @@ export default function Contact() {
   }
 
   function handleSubmit(e) {
+    <Honeypot />;
     e.preventDefault();
     fetch("/", {
       method: "POST",
@@ -47,7 +49,10 @@ export default function Contact() {
               <h2 className="title-font font-semibold text-white tracking-widest text-xs">
                 EMAIL
               </h2>
-              <a className="text-indigo-400 leading-relaxed">
+              <a
+                href="bassey.bd@gmail.com"
+                className="text-indigo-400 leading-relaxed"
+              >
                 bassey.bd@gmail.com
               </a>
               <h2 className="title-font font-semibold text-white tracking-widest text-xs mt-4">
@@ -57,8 +62,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <form
-          netlify
+        <NetlifyForm
           name="contact"
           onSubmit={handleSubmit}
           className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
@@ -113,7 +117,7 @@ export default function Contact() {
           >
             Submit
           </button>
-        </form>
+        </NetlifyForm>
       </div>
     </section>
   );
