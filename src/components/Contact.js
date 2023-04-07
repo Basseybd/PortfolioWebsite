@@ -15,13 +15,18 @@ export default function Contact() {
 
   function handleSubmit(event) {
     event.preventDefault();
- 
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", name, email, message }),
     })
-      .then(() => alert("Message sent!"))
+      .then(() => {
+        alert("Message sent!");
+        setName("");
+        setEmail("");
+        setMessage("");
+      })
       .catch((error) => alert(error));
   }
 

@@ -24,7 +24,16 @@
     <title>Bassey's Portfolio</title>
   </head>
   <body>
-    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <form
+      name="contact"
+      method="POST"
+      netlify-honeypot="bot-field"
+      data-netlify="true"
+      hidden
+    >
+      <label class="hidden">
+        Don't fill this out if you're human: <input name="bot-field" />
+      </label>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
