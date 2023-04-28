@@ -16,29 +16,31 @@ export default function Projects() {
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
             Mainly Front end applications with a focus on React!
+            <br className="hidden lg:inline-block" />
+            click the images to visit their repositories!
           </p>
         </div>
-        <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap w-full -m-4">
           {projects.map((project) => (
-            <a
-              href={project.link}
-              key={project.image}
-              className="sm:w-1/2 w-100 p-4"
-            >
-              <div className="flex relative">
+            <div className="sm:w-1/2 w-100 p-4 border flex flex-row">
+              <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900">
+                <h1 className="title-font text-lg font-medium text-white mb-3">
+                  {project.title}
+                </h1>
+                <p className="leading-relaxed">{project.description}</p>
+              </div>
+              <a
+                href={project.link}
+                key={project.image}
+                className="sm:w-1/2 w-100 p-4 "
+              >
                 <img
                   alt="gallery"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="relative w-full h-full object-cover object-center"
                   src={project.image}
                 />
-                <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
-                  <h1 className="title-font text-lg font-medium text-white mb-3">
-                    {project.title}
-                  </h1>
-                  <p className="leading-relaxed">{project.description}</p>
-                </div>
-              </div>
-            </a>
+              </a>
+            </div>
           ))}
         </div>
       </div>

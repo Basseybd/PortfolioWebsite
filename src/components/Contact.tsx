@@ -81,7 +81,7 @@ export default function Contact() {
             value="Contact me form filled from basseyolaoluduke.com"
           />
           <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
-            Hire Me
+            Lets work together!
           </h2>
           <p className="leading-relaxed mb-5">
             Looking for a new developer or a quick chat? Contact me below!

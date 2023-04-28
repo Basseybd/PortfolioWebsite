@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function Navbar() {
   return (
     <header className="bg-gray-800 md:sticky top-0 z-10">
@@ -19,19 +18,21 @@ export default function Navbar() {
             Skills
           </a>
           <a
-            href=" https://drive.google.com/file/d/1V0Pcesoezl7YAl4xlAHAi9uAatv5o8lq/view?usp=sharing"
+            href="https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/Bassey+Duke's+Resume+.pdf"
             className="mr-5 hover:text-white"
           >
             My Resume
           </a>
         </nav>
-
         <a
           href="#contact"
           className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
         >
-          Hire Me
-          <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 ml-1" />
+          Lets work together!
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            className="h-3.5 w-3.5 pt-0.5 ml-1"
+          />
         </a>
       </div>
     </header>

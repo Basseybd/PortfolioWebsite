@@ -1,16 +1,26 @@
 export const projects = [
   {
-    title: "React Task Tracker",
+    title: "AfroVibe",
     description:
-      "React app that deals with props, useStates, useEffects and routering.",
-    image: "./reminder-app.gif",
+      "React app made using Typescript, tailwind css and hosted on both Vercel and Netlify",
+    image:
+      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/afrovibe.gif",
     link: "https://github.com/Basseybd/react-task-tracker",
   },
   {
     title: "React Book List",
     description:
       "Basic use of React Components to make an list of amazon books.",
-    image: "./react-amazon-book-list.png",
+    image:
+      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/tasktracker.gif",
+    link: "https://github.com/Basseybd/react-book-list",
+  },
+  {
+    title: "React Book List",
+    description:
+      "Basic use of React Components to make an list of amazon books.",
+    image:
+      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/booklist.png",
     link: "https://github.com/Basseybd/react-book-list",
   },
 ];
