@@ -1,4 +1,4 @@
-import Socials from "./Socials.js";
+import Socials from "./Socials";
 
 export default function About() {
   return (
@@ -10,7 +10,7 @@ export default function About() {
           </h1>
           <p className="mb-8 leading-relaxed">
             Current working at Accenture as a Software engineering consultant. 
-            <br className="hidden lg:inline-block" />I am a graduate of Drexel
+            <br className="hidden lg:inline-block" /> I am a graduate of Drexel
             University who majored in computer science with a track in both
             Artificial intelligence and human-computer interaction.
           </p>
