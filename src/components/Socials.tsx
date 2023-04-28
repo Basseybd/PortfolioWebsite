@@ -11,10 +11,10 @@ export default function Socials() {
           after:content-[''] after:absolute after:top-1 after:-left-2.5 after:w-2 after:h-full after:bg-gray-900 origin-right"
             >
               <a href={social.link}>
-                <span
+                <div
                   className={`fa fa-${social.name} absolute top-0 left-0 w-full h-full flex bg-gray-900 justify-center items-center text-white text-3xl ease-out duration-300 
-              hover:z-50 hover:duration-75 hover:text-white hover:shadow-sm hover:translate-x-2.5 hover:-translate-y-2.5 hover:opacity-100 hover:bg-${social.color}-500`}
-                ></span>
+              hover:z-50 hover:duration-75 hover:text-white hover:shadow-sm hover:translate-x-2.5 hover:-translate-y-2.5 hover:opacity-100 ${social.hoverColor}`}
+                ></div>
               </a>
             </li>
           ))}

@@ -48,13 +48,13 @@ export const skills = [
 
 export const socials = [
   {
-    name: "github",
-    link: "https://github.com/Basseybd",
-    color: "purple",
-  },
-  {
     name: "linkedin",
     link: "https://www.linkedin.com/in/basseyduke/",
-    color: "blue",
+    hoverColor: "hover:bg-blue-500",
+  },
+  {
+    name: "github",
+    link: "https://github.com/Basseybd",
+    hoverColor: "hover:bg-purple-500",
   },
 ];
