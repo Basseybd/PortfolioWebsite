@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 
-
 export default function App() {
   return (
     <div className="text-gray-400 bg-gray-900 body-font">

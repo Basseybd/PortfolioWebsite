@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faMicrochip } from "@fortawesome/free-solid-svg-icons";
-import { skills } from "../data";
+import { skills } from "../Data/data";
 
 export default function Skills() {
   return (
