@@ -5,15 +5,18 @@ export const projects = [
       "React app made using Typescript, tailwind css and hosted on both Vercel and Netlify",
     image:
       "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/afrovibe.gif",
-    link: "https://github.com/Basseybd/react-task-tracker",
+    link: "https://github.com/Basseybd/afrovibe",
+    deployed: "https://afrovibe.vercel.app/",
   },
   {
-    title: "React Book List",
+    title: "React task trasker",
     description:
       "Basic use of React Components to make an list of amazon books.",
     image:
       "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/tasktracker.gif",
-    link: "https://github.com/Basseybd/react-book-list",
+    link: "https://github.com/Basseybd/react-task-tracker",
+    deployed: "https://react-task-tracker-indol-seven.vercel.app/",
+    note: "This was hosted on a json server locally thus doesn't have full functionality",
   },
   {
     title: "React Book List",
@@ -22,6 +25,7 @@ export const projects = [
     image:
       "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/booklist.png",
     link: "https://github.com/Basseybd/react-book-list",
+    deployed: "https://react-book-list-six.vercel.app/",
   },
 ];
 

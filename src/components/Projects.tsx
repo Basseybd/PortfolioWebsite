@@ -20,15 +20,9 @@ export default function Projects() {
             click the images to visit their repositories!
           </p>
         </div>
-        <div className="flex flex-wrap w-full -m-4">
+        <div className="flex flex-col w-full -m-4">
           {projects.map((project) => (
-            <div className="sm:w-1/2 w-100 p-4 border flex flex-row">
-              <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900">
-                <h1 className="title-font text-lg font-medium text-white mb-3">
-                  {project.title}
-                </h1>
-                <p className="leading-relaxed">{project.description}</p>
-              </div>
+            <div className=" w-100 p-4 border flex flex-row">
               <a
                 href={project.link}
                 key={project.image}
@@ -40,6 +34,26 @@ export default function Projects() {
                   src={project.image}
                 />
               </a>
+              <div className="sm:w-1/2 px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900">
+                <h1 className="title-font text-lg font-medium text-white mb-3">
+                  {project.title}
+                </h1>
+                <p className="leading-relaxed">{project.description}</p>
+                <a
+                  href={project.deployed}
+                  className="sm:w-1/2 w-100 p-4 cursor-pointer text-blue-400"
+                >
+                  Deployed here
+                </a>
+                {project.note ? (
+                  <>
+                    <br />
+                    {project.note}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           ))}
         </div>
