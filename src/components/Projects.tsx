@@ -22,7 +22,7 @@ export default function Projects() {
         </div>
         <div className="flex flex-col w-full -m-4">
           {projects.map((project) => (
-            <div className=" w-100 p-4 border flex flex-row">
+            <div className="w-100 p-4 border flex flex-wrap">
               <a
                 href={project.link}
                 key={project.image}
