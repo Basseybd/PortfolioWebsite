@@ -54,11 +54,11 @@ export const socials = [
   {
     name: "linkedin",
     link: "https://www.linkedin.com/in/basseyduke/",
-    hoverColor: "hover:bg-blue-500",
+    hoverColor: "bg-blue-500",
   },
   {
     name: "github",
     link: "https://github.com/Basseybd",
-    hoverColor: "hover:bg-purple-500",
+    hoverColor: "bg-purple-500",
   },
 ];

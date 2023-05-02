@@ -22,16 +22,39 @@ export default function Contact() {
       body: encode({ "form-name": "contact", name, email, message }),
     })
       .then(() => {
-        alert("Message sent!");
-        setName("");
-        setEmail("");
-        setMessage("");
+        const nameInput = document.getElementById("name") as HTMLInputElement;
+        const emailInput = document.getElementById("email") as HTMLInputElement;
+        const messageInput = document.getElementById(
+          "message"
+        ) as HTMLInputElement;
+
+        const inputs = [nameInput, emailInput, messageInput];
+        inputs.forEach((input) => (input.value = ""));
+
+        const alertDiv = document.createElement("div");
+
+        alertDiv.innerText =
+          "Thank you for your message! We will be in touch soon!";
+        alertDiv.style.position = "fixed";
+        alertDiv.style.top = "50%";
+        alertDiv.style.left = "50%";
+        alertDiv.style.transform = "translate(-50%, -50%)";
+        alertDiv.style.backgroundColor = "#4caf50";
+        alertDiv.style.color = "white";
+        alertDiv.style.padding = "10px";
+        alertDiv.style.borderRadius = "5px";
+        alertDiv.style.zIndex = "50";
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => {
+          alertDiv.remove();
+        }, 5000);
       })
       .catch((error) => alert(error));
   }
 
   return (
-    <section id="contact" className="relative">
+    <section id="contact" className="bg-gray-900 py-20">
       <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
         <div className="lg:w-2/3 md:w-1/2 bg-gray-900 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
           <iframe
@@ -80,34 +103,41 @@ export default function Contact() {
             name="subject"
             value="Contact me form filled from basseyolaoluduke.com"
           />
-          <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
-            Lets work together!
-          </h2>
+          <h2 className="text-white text-2xl font-bold mb-5">Contact Me</h2>
           <p className="leading-relaxed mb-5">
-            Looking for a new developer or a quick chat? Contact me below!
+            If you're looking for a reliable and skilled developer to help bring
+            your project to life, get in touch with me today.
           </p>
-          <div className="relative mb-4">
-            <label htmlFor="name" className="leading-7 text-sm text-gray-400">
+          <div className="mb-3">
+            <label
+              htmlFor="name"
+              className="block text-gray-400 font-medium mb-1"
+            >
               Name
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-2 px-3 transition-colors duration-200 ease-in-out"
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
-          <div className="relative mb-4">
-            <label htmlFor="email" className="leading-7 text-sm text-gray-400">
+          <div className="mb-3">
+            <label
+              htmlFor="email"
+              className="block text-gray-400 font-medium mb-1"
+            >
               Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-2 px-3 transition-colors duration-200 ease-in-out"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="relative mb-4">
@@ -122,11 +152,12 @@ export default function Contact() {
               name="message"
               className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               onChange={(e) => setMessage(e.target.value)}
+              required
             />
           </div>
           <button
             type="submit"
-            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            className="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
           >
             Submit
           </button>

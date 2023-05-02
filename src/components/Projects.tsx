@@ -4,55 +4,56 @@ import { projects } from "../Data/data";
 
 export default function Projects() {
   return (
-    <section id="projects" className="text-gray-400 bg-gray-900 body-font">
-      <div className="container px-5 py-10 mx-auto text-center lg:px-40">
-        <div className="flex flex-col w-full mb-20">
-          <FontAwesomeIcon
-            icon={faCode}
-            className="mx-auto inline-block w-10 mb-4"
-          />
-          <h1 className="sm:text-4xl text-3xl font-medium title-font mb-4 text-white">
+    <section id="projects" className="bg-gray-100">
+      <div className="container mx-auto px-4 py-16 lg:px-20">
+        <div className="mb-16">
+          <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
             Apps I've Built
           </h1>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Mainly Front end applications with a focus on React!
-            <br className="hidden lg:inline-block" />
-            click the images to visit their repositories!
+          <p className="text-gray-600 text-center text-lg">
+            Mainly front-end applications with a focus on React! Click the
+            images to visit their repositories.
           </p>
         </div>
-        <div className="flex flex-col w-full -m-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div className="w-100 p-4 border flex flex-wrap">
-              <a
-                href={project.link}
-                key={project.image}
-                className="sm:w-1/2 w-100 p-4 "
-              >
+            <div
+              key={project.image}
+              className="bg-white rounded-lg overflow-hidden shadow-md"
+            >
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
                 <img
-                  alt="gallery"
-                  className="relative w-full h-full object-cover object-center"
+                  alt="project"
+                  className="w-full h-56 object-cover object-center"
                   src={project.image}
                 />
               </a>
-              <div className="sm:w-1/2 px-8 py-10 relative w-full border-4 border-gray-800 bg-gray-900">
-                <h1 className="title-font text-lg font-medium text-white mb-3">
-                  {project.title}
-                </h1>
-                <p className="leading-relaxed">{project.description}</p>
-                <a
-                  href={project.deployed}
-                  className="sm:w-1/2 w-100 p-4 cursor-pointer text-blue-400"
-                >
-                  Deployed here
-                </a>
-                {project.note ? (
-                  <>
-                    <br />
-                    {project.note}
-                  </>
-                ) : (
-                  <></>
-                )}
+              <div className="p-4">
+                <div className="flex items-center mb-4">
+                  <FontAwesomeIcon
+                    icon={faCode}
+                    className="text-blue-600 mr-2"
+                  />
+                  <h2 className="text-xl font-bold text-gray-800">
+                    {project.title}
+                  </h2>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="mt-4 flex justify-between items-center">
+                  <a
+                    href={project.deployed}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    Visit Site
+                  </a>
+                  {project.note && (
+                    <p className="text-sm text-gray-600">{project.note}</p>
+                  )}
+                </div>
               </div>
             </div>
           ))}
