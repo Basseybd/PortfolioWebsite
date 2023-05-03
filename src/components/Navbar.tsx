@@ -25,6 +25,8 @@ export default function Navbar() {
           </a>
           <a
             href="https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/Bassey+Duke's+Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mr-5 py-2 px-3 text-white hover:text-white"
           >
             My Resume
