@@ -1,19 +1,6 @@
-import { useState } from "react";
 import ContactForm from "./ContactForm";
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  function encode(data: Record<string, any>) {
-    return Object.keys(data)
-      .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      )
-      .join("&");
-  }
-
   return (
     <section id="contact" className="bg-gray-900 py-20">
       <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
