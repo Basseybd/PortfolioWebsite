@@ -21,7 +21,7 @@ export const projects = [
   {
     title: "React Book List",
     description:
-      "Basic use of React Components to make an list of amazon books.",
+      "Basic use of React Components to make a list of amazon books.",
     image:
       "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/booklist.png",
     link: "https://github.com/Basseybd/react-book-list",
