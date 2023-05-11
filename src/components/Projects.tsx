@@ -12,7 +12,7 @@ export default function Projects() {
           </h1>
           <p className="text-gray-600 text-center text-lg">
             Mainly front-end applications with a focus on React! Click the
-            images to visit their repositories.
+            images to visit the websites!
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -21,7 +21,11 @@ export default function Projects() {
               key={project.image}
               className="bg-white rounded-lg overflow-hidden shadow-md"
             >
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
+              <a
+                href={project.deployed}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   alt="project"
                   className="w-full h-56 object-cover object-center"
@@ -43,12 +47,12 @@ export default function Projects() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <a
-                    href={project.deployed}
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:underline"
                   >
-                    Visit Site
+                    Visit Repo
                   </a>
                   {project.note && (
                     <p className="text-sm text-gray-600">{project.note}</p>
