@@ -36,7 +36,7 @@ export default function Navbar() {
           href="#contact"
           className="inline-flex items-center bg-gray-700 border-0 py-2 px-3 focus:outline-none hover:bg-white hover:text-gray-800 rounded text-base mt-4 md:mt-0"
         >
-          Let's build together!
+          Let&apos;s build together!
           <FontAwesomeIcon
             icon={faChevronRight}
             className="h-3.5 w-3.5 pt-0.5 ml-1"

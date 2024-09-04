@@ -14,8 +14,8 @@ export default function ContactForm() {
       />
       <h2 className="text-white text-2xl font-bold mb-5">Contact Me</h2>
       <p className="leading-relaxed mb-5">
-        If you're looking for a reliable and skilled developer to help bring
-        your project to life, get in touch with me today.
+        If you&apos;re looking for a reliable and skilled developer to help
+        bring your project to life, get in touch with me today.
       </p>
       <div className="mb-3">
         <label htmlFor="name" className="block text-gray-400 font-medium mb-1">

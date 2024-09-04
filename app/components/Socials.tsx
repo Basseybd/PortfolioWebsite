@@ -1,6 +1,13 @@
 import { socials } from "../Data/data";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Socials() {
+  const iconMap: { [key: string]: any } = {
+    linkedin: faLinkedinIn,
+    github: faGithub,
+  };
+
   return (
     <section id="socials" className="py-8">
       <div className="container mx-auto flex items-center justify-end">
@@ -30,9 +37,12 @@ export default function Socials() {
                   } group-hover:-translate-y-8 `}
                 ></div>
                 <div
-                  className={`absolute top-0 left-0 w-full  h-full flex items-center justify-center text-white text-3xl transition-transform transform duration-500 ease-in-out group-hover:z-50 ${social.hoverColor} group-hover:translate-x-10 group-hover:-translate-y-10 `}
+                  className={`absolute top-0 left-0 w-full h-full flex items-center justify-center text-white transition-transform transform duration-500 ease-in-out group-hover:z-50 ${social.hoverColor} group-hover:translate-x-10 group-hover:-translate-y-10 `}
                 >
-                  <i className={`fa fa-${social.name}`} />
+                  <FontAwesomeIcon
+                    icon={iconMap[social.name]}
+                    className="w-8 h-8"
+                  />
                 </div>
               </a>
             </li>

@@ -1,3 +1,4 @@
+"use client";
 import ContactForm from "./ContactForm";
 
 export default function Contact() {
@@ -14,13 +15,13 @@ export default function Contact() {
             src="https://www.google.com/maps/embed/v1/place?q=Philadelphia,+PA,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
           />
           <div className="bg-gray-900 relative flex flex-wrap py-6 rounded shadow-md">
-            <div className="lg:w-1/2 px-6">
+            <div className="px-6 pb-2">
               <h2 className="title-font font-semibold text-white tracking-widest text-xs">
-                ADDRESS
+                LOCATION
               </h2>
               <p className="mt-1">Greater Philadelphia Area</p>
             </div>
-            <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
+            <div className="px-6">
               <h2 className="title-font font-semibold text-white tracking-widest text-xs">
                 EMAIL
               </h2>
@@ -30,10 +31,6 @@ export default function Contact() {
               >
                 bassey.bd@gmail.com
               </a>
-              <h2 className="title-font font-semibold text-white tracking-widest text-xs mt-4">
-                PHONE
-              </h2>
-              <p className="leading-relaxed">(267) 580-9782</p>
             </div>
           </div>
         </div>

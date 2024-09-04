@@ -1,5 +1,14 @@
 export const projects = [
   {
+    title: "EverStay",
+    description:
+      "A full-stack home rental and booking service developed using Next.js 13, React, TypeScript, Tailwind CSS, Prisma, MongoDB, NextAuth, and Cloudinary CDN. Deployed on Vercel.",
+    image:
+      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/EverStay.gif",
+    link: "https://github.com/Basseybd/EverStay",
+    deployed: "https://everstay.vercel.app/",
+  },
+  {
     title: "AfroVibe",
     description:
       "React app made using Typescript, tailwind css and hosted on both Vercel and Netlify",
@@ -30,24 +39,24 @@ export const projects = [
 ];
 
 export const skills = [
-  "React",
+  "React.js",
+  "Next.js",
+  "TypeScript",
   "JavaScript",
-  "HTML",
   "Tailwind CSS",
-  "CSS",
+  "Chakra UI",
+  "React Native",
   "Python",
-  "AWS API Gateway",
-  "AWS Lambda",
-  "AWS Pinpoint",
-  "Dynamo DB",
-  "AWS Glue",
-  "AWS S3",
-  "AWS Athena",
-  "Ruby on Rails",
-  "PostgreSQL",
-  "MySQL",
+  "Docker",
+  "Terraform",
+  "Kubernetes",
+  "Drone",
+  "MongoDB",
+  "Prisma",
+  "NextAuth",
+  "Vercel",
+  "AWS ecosystem",
   "Java",
-  "Java Swing",
 ];
 
 export const socials = [
