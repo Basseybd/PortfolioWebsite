@@ -44,7 +44,10 @@ export default function ContactForm() {
         <ValidationError prefix="Email" field="email" errors={state.errors} />
       </div>
       <div className="relative mb-4">
-        <label htmlFor="message" className="leading-7 text-sm text-gray-400">
+        <label
+          htmlFor="message"
+          className="block text-gray-400 font-medium mb-1"
+        >
           Message
         </label>
         <textarea
