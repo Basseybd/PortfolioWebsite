@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
-import { projects } from "../Data/data";
+import { projects } from "../data/data";
 import Image from "next/image";
 
 export default function Projects() {

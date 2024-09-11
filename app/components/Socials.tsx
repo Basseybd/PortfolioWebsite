@@ -1,4 +1,4 @@
-import { socials } from "../Data/data";
+import { socials } from "../data/data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 
