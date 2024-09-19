@@ -14,7 +14,7 @@ export const projects = [
       "React app made using Typescript, tailwind css and hosted on both Vercel and Netlify",
     image:
       "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/afrovibe.gif",
-    link: "https://github.com/Basseybd/afrovibe",
+    link: "https://github.com/Basseybd/AfroVibe",
     deployed: "https://afrovibe.vercel.app/",
   },
   {
