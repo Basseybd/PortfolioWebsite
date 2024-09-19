@@ -10,8 +10,9 @@ export default function About() {
             src={"/bassey.jpg"}
             alt="bassey profile"
             className="h-52 w-52 rounded-full"
-            width={100}
-            height={100}
+            width={208}
+            height={208}
+            priority
           />
           <h1 className="text-3xl sm:text-4xl font-medium text-gray-900 mb-4">
             Hi, I&apos;m Bassey Duke.
