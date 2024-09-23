@@ -18,7 +18,7 @@ export default function About() {
             Hi, I&apos;m Bassey Duke.
           </h1>
           <p className="mb-8 leading-relaxed text-gray-700">
-            I&apos;m software engineer with almost 4 years at Accenture, I
+            I&apos;m a software engineer with almost 4 years at Accenture, I
             specialize in front-end and full-stack development, creating
             innovative solutions and enhancing user experiences.
           </p>
