@@ -6,21 +6,23 @@ export default function About() {
     <section id="about" className="bg-white">
       <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <Image
-            src={"/bassey.jpg"}
-            alt="bassey profile"
-            className="h-52 w-52 rounded-full"
-            width={208}
-            height={208}
-            priority
-          />
+          <div className="relative h-52 w-52 rounded-full overflow-hidden">
+            <Image
+              src="/bassey.jpg"
+              alt="bassey profile"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
           <h1 className="text-3xl sm:text-4xl font-medium text-gray-900 mb-4">
             Hi, I&apos;m Bassey Duke.
           </h1>
           <p className="mb-8 leading-relaxed text-gray-700">
-            I&apos;m a software engineer with almost 4 years at Accenture, I
-            specialize in front-end and full-stack development, creating
-            innovative solutions and enhancing user experiences.
+            I&apos;m a software engineer with nearly 5 years at Accenture,
+            specializing in front-end and full-stack development. I build
+            scalable applications, streamline user experiences, and deliver
+            innovative solutions that drive business impact.
           </p>
           <div className="flex justify-center">
             <a
@@ -37,7 +39,7 @@ export default function About() {
             </a>
           </div>
         </div>
-        <div className="md:w-1/2 ">
+        <div className="md:w-1/2">
           <Socials />
         </div>
       </div>
