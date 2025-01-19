@@ -9,6 +9,16 @@ export const projects = [
     deployed: "https://genuis-saas-ai.vercel.app/",
   },
   {
+    title: "DuckBot",
+    description:
+      "An AI-powered Discord chatbot integrating OpenAI and Replicate APIs to deliver text-based responses and AI-generated images. Built with Node.js, Discord.js, OpenAI, and Replicate. Deployed on Railway.",
+    image:
+      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/duckbot.gif",
+    link: "https://github.com/Basseybd/discord-ai-bot",
+    deployed:
+      "https://discord.com/oauth2/authorize?client_id=1326301765674598591",
+  },
+  {
     title: "EverStay",
     description:
       "A full-stack home rental and booking service developed using Next.js 13, React, TypeScript, Tailwind CSS, Prisma, MongoDB, NextAuth, and Cloudinary CDN. Deployed on Vercel.",
