@@ -57,25 +57,35 @@ export const projects = [
   },
 ];
 
+// Organized by categories (most impressive first)
 export const skills = [
-  "React.js",
+  // AI / Prompt Engineering
+  "Replicate",
+  "OpenAI",
+
+  // Front End
   "Next.js",
+  "React.js",
   "TypeScript",
+  "React Native",
   "JavaScript",
   "Tailwind CSS",
   "Chakra UI",
-  "React Native",
+
+  // Full Stack
   "Python",
+  "Java",
+  "MongoDB",
+  "Prisma",
+  "NextAuth",
+
+  // Cloud / DevOps
+  "AWS ecosystem",
   "Docker",
   "Terraform",
   "Kubernetes",
   "Drone",
-  "MongoDB",
-  "Prisma",
-  "NextAuth",
   "Vercel",
-  "AWS ecosystem",
-  "Java",
 ];
 
 export const socials = [
