@@ -62,6 +62,7 @@ export const skills = [
   // AI / Prompt Engineering
   "Replicate",
   "OpenAI",
+  "v0",
 
   // Front End
   "Next.js",
@@ -72,12 +73,13 @@ export const skills = [
   "Tailwind CSS",
   "Chakra UI",
 
-  // Full Stack
+  // Backend (formerly Full Stack)
   "Python",
   "Java",
   "MongoDB",
   "Prisma",
   "NextAuth",
+  "Auth0",
 
   // Cloud / DevOps
   "AWS ecosystem",

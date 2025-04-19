@@ -1,13 +1,16 @@
+import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Bassey's Portfolio",
-  description: "An insight to Bassey's software dev experience",
+  title: "Bassey Duke | Software Engineer",
+  description:
+    "Full-stack developer specializing in React, Next.js, and modern web technologies",
 };
 
 export default function RootLayout({
@@ -16,10 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="text-gray-400 bg-gray-900 body-font">
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} bg-black text-gray-200`}>
         <Navbar />
-        <div className={inter.className}>{children}</div>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
