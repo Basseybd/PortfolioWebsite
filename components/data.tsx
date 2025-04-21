@@ -36,25 +36,6 @@ export const projects = [
     link: "https://github.com/Basseybd/AfroVibe",
     deployed: "https://afrovibe.vercel.app/",
   },
-  {
-    title: "React task tracker",
-    description:
-      "A basic task tracker demonstrating React Components to manage tasks (previously listed as Amazon books).",
-    image:
-      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/tasktracker.gif",
-    link: "https://github.com/Basseybd/react-task-tracker",
-    deployed: "https://react-task-tracker-indol-seven.vercel.app/",
-    note: "This was hosted on a local JSON server, so it lacks full functionality in production.",
-  },
-  {
-    title: "React Book List",
-    description:
-      "A simple React app that displays a list of Amazon books using custom components.",
-    image:
-      "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/demos/booklist.png",
-    link: "https://github.com/Basseybd/react-book-list",
-    deployed: "https://react-book-list-six.vercel.app/",
-  },
 ];
 
 // Organized by categories (most impressive first)
