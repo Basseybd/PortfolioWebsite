@@ -1,83 +1,78 @@
-import Image from "next/image";
-import Link from "next/link";
-import { projects } from "@/components/data";
-import { ExternalLink, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Genius AI",
+    description:
+      "AI SaaS platform generating images, video, music, and code via OpenAI and Replicate APIs, with Stripe subscription billing.",
+    tags: ["Next.js", "TypeScript", "Prisma", "OpenAI", "Replicate", "Stripe"],
+    href: "https://github.com/Basseybd",
+  },
+  {
+    title: "EverStay",
+    description:
+      "Vacation rental marketplace with search, booking flow, Cloudinary media uploads, and NextAuth OAuth.",
+    tags: ["Next.js", "TypeScript", "Prisma", "NextAuth", "Cloudinary"],
+    href: "https://everstay.vercel.app",
+  },
+];
 
 export default function Projects() {
   return (
-    <section id="projects" className="bg-[#080808] py-24">
-      <div className="section-container">
-        <div className="text-center mb-16">
-          <h2 className="heading-lg mb-4">Featured Projects</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A collection of applications I've built using modern web
-            technologies
-          </p>
-        </div>
+    <section
+      id="projects"
+      className="bg-ink grid-texture border-t border-line-dark py-24 px-6 sm:px-8"
+    >
+      <div className="max-w-6xl mx-auto">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-inverse-muted mb-4">
+          02 / Projects
+        </p>
+        <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-inverse mb-14">
+          Where I've shipped.
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <div key={project.image} className="card group overflow-visible">
-              <div className="relative h-64 overflow-hidden rounded-t-lg">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  className="object-cover object-center w-full h-full transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
-                  width={600}
-                  height={400}
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
-                  <div className="p-6 w-full">
-                    <div className="flex justify-between items-center">
-                      <Link
-                        href={project.deployed}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-blue-400 transition-colors flex items-center gap-1"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        <span>Live Demo</span>
-                      </Link>
-                      <Link
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-blue-400 transition-colors flex items-center gap-1"
-                      >
-                        <Github className="h-4 w-4" />
-                        <span>GitHub</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">
+            <a
+              key={project.title}
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-ink-raised border border-line-dark p-8 hover:border-accent transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <h3 className="font-serif text-[1.5rem] text-inverse leading-snug">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-                {project.note && (
-                  <p className="text-sm text-gray-500 italic">{project.note}</p>
-                )}
+                <ArrowUpRight
+                  size={18}
+                  className="text-inverse-muted group-hover:text-accent transition-colors duration-200 shrink-0 mt-1"
+                />
               </div>
-            </div>
-          ))}
-        </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href="https://github.com/Basseybd"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary relative overflow-hidden group"
-          >
-            <span className="relative z-10">View More on GitHub</span>
-            <span className="absolute inset-0 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 opacity-20"></span>
-          </Link>
+              <p className="font-sans text-[15px] text-inverse-muted leading-relaxed mb-7">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono text-[10px] uppercase tracking-widest text-inverse-muted border border-line-dark px-2.5 py-1"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

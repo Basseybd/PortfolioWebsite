@@ -1,108 +1,68 @@
 "use client";
 
-import { useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("xoqzrlko");
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText("bassey.bd@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
-    <section id="contact" className="py-24">
-      <div className="section-container">
-        <div className="text-center mb-16">
-          <h2 className="heading-lg mb-4">Get In Touch</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Interested in working together? Feel free to reach out!
-          </p>
-        </div>
+    <>
+      <section
+        id="contact"
+        className="bg-ink grid-texture border-t border-line-dark py-24 px-6 sm:px-8"
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Big closing headline */}
+          <h2 className="font-serif text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-tight text-inverse mb-10">
+            Let's talk.
+          </h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-xl font-semibold mb-6 text-white">
-              Contact Information
-            </h3>
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            {/* Contact info */}
+            <div>
+              <a
+                href="mailto:bassey.bd@gmail.com"
+                className="block font-sans text-[1.1rem] text-accent hover:text-inverse transition-colors duration-200 mb-8 underline underline-offset-4 decoration-accent/40 hover:decoration-inverse/40"
+              >
+                bassey.bd@gmail.com
+              </a>
 
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-sm font-medium text-gray-400 mb-2">
-                  LOCATION
-                </h4>
-                <p className="text-white">Greater Philadelphia Area</p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-400 mb-2">
-                  EMAIL
-                </h4>
-                <div className="flex items-center">
-                  <a
-                    href="mailto:bassey.bd@gmail.com"
-                    className="text-blue-400 hover:text-blue-300 transition-colors mr-2"
-                  >
-                    bassey.bd@gmail.com
-                  </a>
-                  <button
-                    onClick={copyEmail}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {copied ? "Copied!" : "Copy"}
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-400 mb-2">
-                  CONNECT
-                </h4>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://www.linkedin.com/in/basseyduke/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-blue-400 transition-colors"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href="https://github.com/Basseybd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
-                  >
-                    GitHub
-                  </a>
-                </div>
+              <div className="flex gap-8">
+                <a
+                  href="https://linkedin.com/in/basseyduke"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[10px] uppercase tracking-widest text-inverse-muted hover:text-inverse transition-colors duration-200"
+                >
+                  LinkedIn ↗
+                </a>
+                <a
+                  href="https://github.com/Basseybd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[10px] uppercase tracking-widest text-inverse-muted hover:text-inverse transition-colors duration-200"
+                >
+                  GitHub ↗
+                </a>
               </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-6 text-white">
-              Send a Message
-            </h3>
-
+            {/* Contact form */}
             {state.succeeded ? (
-              <div className="bg-[#112211] border border-green-800 rounded-lg p-6 text-center">
-                <h4 className="text-green-400 font-medium text-lg mb-2">
-                  Message Sent!
-                </h4>
-                <p className="text-gray-300">
-                  Thank you for reaching out. I'll get back to you soon!
+              <div className="border border-line-dark p-6">
+                <p className="font-mono text-[11px] uppercase tracking-widest text-inverse-muted mb-1">
+                  Sent
+                </p>
+                <p className="font-sans text-[15px] text-inverse">
+                  Message received. I'll be in touch soon.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-400 mb-1"
+                    className="block font-mono text-[10px] uppercase tracking-widest text-inverse-muted mb-2"
                   >
                     Name
                   </label>
@@ -111,19 +71,16 @@ export default function Contact() {
                     id="name"
                     name="name"
                     required
-                    className="w-full bg-[#111] border border-[#333] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full bg-transparent border border-line-dark px-4 py-3 font-sans text-[15px] text-inverse placeholder:text-inverse-muted focus:outline-none focus:border-inverse transition-colors duration-200"
+                    placeholder="Your name"
                   />
-                  <ValidationError
-                    prefix="Name"
-                    field="name"
-                    errors={state.errors}
-                  />
+                  <ValidationError prefix="Name" field="name" errors={state.errors} />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-400 mb-1"
+                    className="block font-mono text-[10px] uppercase tracking-widest text-inverse-muted mb-2"
                   >
                     Email
                   </label>
@@ -132,19 +89,16 @@ export default function Contact() {
                     id="email"
                     name="email"
                     required
-                    className="w-full bg-[#111] border border-[#333] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full bg-transparent border border-line-dark px-4 py-3 font-sans text-[15px] text-inverse placeholder:text-inverse-muted focus:outline-none focus:border-inverse transition-colors duration-200"
+                    placeholder="your@email.com"
                   />
-                  <ValidationError
-                    prefix="Email"
-                    field="email"
-                    errors={state.errors}
-                  />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-400 mb-1"
+                    className="block font-mono text-[10px] uppercase tracking-widest text-inverse-muted mb-2"
                   >
                     Message
                   </label>
@@ -153,27 +107,33 @@ export default function Contact() {
                     name="message"
                     rows={5}
                     required
-                    className="w-full bg-[#111] border border-[#333] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full bg-transparent border border-line-dark px-4 py-3 font-sans text-[15px] text-inverse placeholder:text-inverse-muted focus:outline-none focus:border-inverse transition-colors duration-200 resize-none"
+                    placeholder="What's on your mind?"
                   />
-                  <ValidationError
-                    prefix="Message"
-                    field="message"
-                    errors={state.errors}
-                  />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>
 
                 <button
                   type="submit"
                   disabled={state.submitting}
-                  className="btn-primary w-full"
+                  className="font-mono text-[11px] uppercase tracking-widest px-6 py-3 bg-accent text-cream hover:bg-accent/90 transition-colors duration-200 disabled:opacity-50"
                 >
-                  {state.submitting ? "Sending..." : "Send Message"}
+                  {state.submitting ? "Sending..." : "Send message"}
                 </button>
               </form>
             )}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-ink border-t border-line-dark px-6 sm:px-8 py-6">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-inverse-muted">
+            Bassey Duke&nbsp;&nbsp;/&nbsp;&nbsp;New York&nbsp;&nbsp;/&nbsp;&nbsp;2026
+          </p>
+        </div>
+      </footer>
+    </>
   );
 }

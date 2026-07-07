@@ -42,7 +42,7 @@ export default function Navbar() {
           href="/"
           className="font-serif text-xl text-primary hover:text-accent transition-colors duration-200"
         >
-          BD
+          Bassey Duke
         </Link>
 
         {/* Desktop nav */}
