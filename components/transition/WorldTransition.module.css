@@ -1,0 +1,175 @@
+/* World transition overlay. One fixed layer above everything, idle until go(). */
+
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
+  z-index: 2147483000;
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+  contain: strict;
+  --wt-x: 50%;
+  --wt-y: 50%;
+  --wt-color: #2f6fd0;
+  --wt-light: #4f88dd;
+  --wt-deep: #22529b;
+  --wt-tint: #6d9ade;
+  --wt-tint-deep: #4a83d6;
+}
+.root[data-phase] {
+  visibility: visible;
+  pointer-events: auto;
+  cursor: progress;
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* The second layer only exists once the screen is fully covered. As the front
+   lifts it shows for a beat, then lifts after it. */
+.back {
+  visibility: hidden;
+  box-shadow: 0 26px 48px -14px rgba(20, 21, 22, 0.45);
+}
+.root[data-phase="hold"] .back,
+.root[data-phase="reveal"] .back {
+  visibility: visible;
+}
+.root[data-world="work"] .back {
+  background:
+    linear-gradient(100deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.45) 48%, rgba(255, 255, 255, 0) 64%),
+    linear-gradient(180deg, #eef0f2 0%, #c9cdd1 55%, #a7abaf 100%);
+}
+.root[data-world="life"] .back {
+  background: linear-gradient(180deg, var(--wt-tint) 0%, var(--wt-tint-deep) 100%);
+}
+
+.field,
+.rim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(0px at 50% 50%);
+  -webkit-clip-path: circle(0px at 50% 50%);
+}
+/* Once the screen is covered nothing is clipped and the rim is gone. */
+.root[data-phase="hold"] .field,
+.root[data-phase="reveal"] .field {
+  clip-path: none;
+  -webkit-clip-path: none;
+}
+.root[data-phase="hold"] .rim,
+.root[data-phase="reveal"] .rim {
+  visibility: hidden;
+}
+
+/* Work: a graphite field lit from the click point. */
+.root[data-world="work"] .field {
+  background: radial-gradient(130% 95% at var(--wt-x) var(--wt-y), #2c2e31 0%, #1d1e21 34%, #17181a 68%);
+}
+/* Life: the color of the photo that was showing, brighter where you touched. */
+.root[data-world="life"] .field {
+  background: radial-gradient(140% 110% at var(--wt-x) var(--wt-y), var(--wt-light) 0%, var(--wt-color) 42%, var(--wt-deep) 100%);
+}
+
+/* The polished rim on the leading edge of the work flood. */
+.rim {
+  display: none;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    #6e7378,
+    #f4f6f7 9%,
+    #9da3a8 19%,
+    #ffffff 27%,
+    #5d6267 38%,
+    #e9ecee 50%,
+    #7a8085 61%,
+    #f8f9fa 72%,
+    #8d9398 84%,
+    #dfe3e6 92%,
+    #6e7378
+  );
+}
+.root[data-world="work"] .rim {
+  display: block;
+}
+
+/* Chrome sheen that sweeps across the graphite. */
+.sheen {
+  display: none;
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 85vw;
+  min-width: 520px;
+  transform: translate3d(-110%, 0, 0) skewX(-16deg);
+  background: linear-gradient(
+    90deg,
+    rgba(201, 205, 209, 0) 0%,
+    rgba(201, 205, 209, 0.07) 22%,
+    rgba(233, 236, 238, 0.32) 36%,
+    rgba(255, 255, 255, 0.62) 41%,
+    rgba(157, 163, 168, 0.12) 47%,
+    rgba(201, 205, 209, 0.05) 55%,
+    rgba(244, 246, 247, 0.4) 64%,
+    rgba(255, 255, 255, 0.18) 68%,
+    rgba(201, 205, 209, 0) 82%
+  );
+  mix-blend-mode: screen;
+}
+.root[data-world="work"] .sheen {
+  display: block;
+}
+
+/* Polished edge on the bottom of the lifting graphite. */
+.edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    #6e7378 0%,
+    #f4f6f7 16%,
+    #9da3a8 32%,
+    #e9ecee 50%,
+    #7a8085 68%,
+    #f8f9fa 84%,
+    #8d9398 100%
+  );
+}
+.root[data-world="work"][data-phase="hold"] .edge,
+.root[data-world="work"][data-phase="reveal"] .edge {
+  opacity: 1;
+}
+.root[data-world="life"][data-phase="hold"] .edge,
+.root[data-world="life"][data-phase="reveal"] .edge {
+  opacity: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* Reduced motion: a plain crossfade, no shapes, no sweep. */
+.root[data-reduce] .field {
+  clip-path: none;
+  -webkit-clip-path: none;
+}
+.root[data-reduce] .rim,
+.root[data-reduce] .sheen,
+.root[data-reduce] .back,
+.root[data-reduce] .edge {
+  display: none;
+}

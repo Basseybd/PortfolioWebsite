@@ -53,6 +53,30 @@
   }
 }
 
+/* The intro only exists on a session's first page load (see app/layout.tsx). */
+html:not([data-intro]) [data-preloader] {
+  display: none;
+}
+/* Safety net: if scripts never start, the intro still gets out of the way. */
+[data-preloader] {
+  animation: preloaderSafety 0.6s ease 9s forwards;
+}
+@keyframes preloaderSafety {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-preloader] {
+    display: none;
+  }
+}
+/* Graphite pages keep the overscroll graphite too. */
+body:has(.life-page) {
+  background-color: #17181a;
+}
+
 @layer components {
   .page {
     @apply mx-auto w-full max-w-page;

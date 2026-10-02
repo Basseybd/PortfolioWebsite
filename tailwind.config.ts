@@ -25,6 +25,7 @@ const config: Config = {
         display: ["'Shippori Mincho'", "'Hiragino Mincho ProN'", "Georgia", "serif"],
         sans: ["'Zen Kaku Gothic New'", "system-ui", "sans-serif"],
         mono: ["'Fragment Mono'", "ui-monospace", "monospace"],
+        condensed: ["'Saira Extra Condensed'", "'Arial Narrow'", "sans-serif"],
       },
       maxWidth: { page: "84rem" },
     },

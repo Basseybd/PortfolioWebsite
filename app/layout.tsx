@@ -6,9 +6,9 @@ import "@fontsource/zen-kaku-gothic-new/latin-400.css";
 import "@fontsource/zen-kaku-gothic-new/latin-500.css";
 import "@fontsource/zen-kaku-gothic-new/latin-700.css";
 import "@fontsource/fragment-mono/400.css";
+import "@fontsource/saira-extra-condensed/latin-800.css";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { WorldTransitionProvider } from "@/components/transition/WorldTransition";
 import { site } from "@/lib/content";
 
 const title = "Bassey Duke | AI-focused Senior Software Engineer";
@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title,
   description,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title,
     description,
@@ -34,11 +43,18 @@ export const viewport: Viewport = {
   themeColor: "#E3E4E2",
 };
 
+// Runs before first paint. Marks the first page load of a session so the home
+// page can play its intro, and only then.
+const introScript = `(function(){var d=document.documentElement;try{if(!sessionStorage.getItem("bd-intro")){d.setAttribute("data-intro","");sessionStorage.setItem("bd-intro","1")}}catch(e){d.setAttribute("data-intro","")}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
       <body>
         <a
           href="#main"
@@ -46,9 +62,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <WorldTransitionProvider>{children}</WorldTransitionProvider>
       </body>
     </html>
   );
