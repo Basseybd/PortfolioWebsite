@@ -1,70 +1,50 @@
-const stats = [
-  { value: "97%", label: "faster builds" },
-  { value: "$100M+", label: "revenue supported" },
-  { value: "$2M+", label: "annual savings" },
-  { value: "1M+", label: "patients reached" },
-];
+import GlyphPortrait from "@/components/GlyphPortrait";
+import { portrait, site } from "@/lib/content";
 
 export default function Hero() {
   return (
-    <section className="bg-cream pt-36 pb-28 px-6 sm:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Mono location label */}
-        <p className="hero-line font-mono text-[11px] uppercase tracking-widest text-secondary mb-10">
-          Senior Software Engineer&nbsp;&nbsp;/&nbsp;&nbsp;New York
-        </p>
+    <section id="top" aria-labelledby="hero-name" className="on-dark bg-charcoal text-bone">
+      <div className="page grid items-center gap-14 pb-24 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-x-12 lg:pb-32 lg:pt-20">
+        <div className="lg:col-span-6">
+          <h1
+            id="hero-name"
+            className="font-display text-[clamp(3.9rem,10vw,7.25rem)] leading-[0.9] tracking-[-0.03em]"
+          >
+            Bassey
+            <br />
+            Duke
+          </h1>
 
-        {/* Headline */}
-        <h1 className="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.04] tracking-[-0.02em] text-primary mb-8 max-w-4xl">
-          <span className="hero-line block">I build the systems</span>
-          <span className="hero-line block">that make engineering</span>
-          <span className="hero-line block">
-            teams{" "}
-            <em className="text-accent">faster.</em>
-          </span>
-        </h1>
+          <p className="mt-10 max-w-[19ch] font-display text-[clamp(1.75rem,4.2vw,2.5rem)] leading-[1.14] tracking-[-0.01em]">
+            I build AI features people actually use, and the systems that keep
+            them running.
+          </p>
 
-        {/* Sub-line */}
-        <p className="hero-line font-sans text-[17px] text-secondary leading-relaxed max-w-[62ch] mb-14">
-          7+ years across fintech, consulting, and healthcare. Currently
-          modernizing frontend platforms and shipping AI infrastructure at
-          Capital One.
-        </p>
+          <p className="mt-7 max-w-[30rem] text-[1.125rem] leading-relaxed text-smoke">
+            Senior software engineer at Capital One and a photographer on the
+            side, based in New York. Taking on AI contract and part-time work.
+          </p>
 
-        {/* Stats — horizontal on desktop, 2-col on mobile */}
-        <div className="hero-line">
-          {/* Desktop: single row with hairline dividers */}
-          <div className="hidden sm:flex items-center flex-wrap gap-y-6">
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="flex items-center">
-                {i > 0 && (
-                  <div className="w-px h-10 bg-line mx-8 shrink-0" />
-                )}
-                <div>
-                  <div className="font-mono text-[1.6rem] font-medium text-primary leading-none tracking-tight">
-                    {stat.value}
-                  </div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-secondary mt-1.5">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              className="bg-ember px-6 py-3.5 text-[1.0625rem] text-paper transition-colors duration-200 hover:bg-ember-light hover:text-charcoal"
+            >
+              Start a project
+            </a>
+            <a
+              href={site.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-bone/70 px-6 py-3.5 text-[1.0625rem] transition-colors duration-200 hover:bg-bone hover:text-charcoal"
+            >
+              View résumé
+            </a>
           </div>
+        </div>
 
-          {/* Mobile: 2-column grid */}
-          <div className="grid grid-cols-2 gap-6 sm:hidden">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <div className="font-mono text-2xl font-medium text-primary leading-none tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-secondary mt-1.5">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="lg:col-span-6">
+          <GlyphPortrait src={portrait.srcSmall} alt={portrait.alt} />
         </div>
       </div>
     </section>

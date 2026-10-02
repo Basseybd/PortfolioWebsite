@@ -1,101 +1,126 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  /* Fonts */
-  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "Courier New", Courier, monospace;
-
-  /* Surface colors */
-  --color-cream: #FAF7F1;
-  --color-cream-deep: #F2EDE3;
-  --color-ink: #141412;
-  --color-ink-raised: #1D1D1A;
-
-  /* Accent */
-  --color-accent: #C4501E;
-
-  /* Lines / borders */
-  --color-line: #DDD6C8;
-  --color-line-dark: #2A2A26;
-
-  /* Typography — on cream */
-  --color-primary: #1A1915;
-  --color-secondary: #5C594F;
-
-  /* Typography — on dark */
-  --color-inverse: #EDEAE1;
-  --color-inverse-muted: #8A877C;
-}
-
-/* ------------------------------------------------------------------ */
-/* Base                                                                 */
-/* ------------------------------------------------------------------ */
-
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@layer base {
   html {
-    scroll-behavior: auto;
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  body {
+    @apply bg-cream font-serif text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+  section[id],
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  ::selection {
+    background: #a9481c;
+    color: #f8f3ea;
+  }
+  :focus-visible {
+    outline: 2px solid #a9481c;
+    outline-offset: 4px;
+  }
+  .on-dark ::selection {
+    background: #e2834e;
+    color: #201b18;
+  }
+  .on-dark :focus-visible {
+    outline-color: #e2834e;
+  }
+  html {
+    scrollbar-color: #a9481c #f1e8dc;
   }
 }
 
-/* ------------------------------------------------------------------ */
-/* Hero load animations (fire once on mount)                           */
-/* ------------------------------------------------------------------ */
+@layer components {
+  .page {
+    @apply mx-auto w-full max-w-page;
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+  @media (min-width: 640px) {
+    .page {
+      padding-left: max(2rem, env(safe-area-inset-left));
+      padding-right: max(2rem, env(safe-area-inset-right));
+    }
+  }
+  @media (min-width: 1024px) {
+    .page {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+  /* Museum wall-label metadata: real data only (roles, stacks, dates). */
+  .label {
+    @apply font-mono text-[0.78rem] leading-[1.55];
+    font-variant-numeric: tabular-nums;
+  }
+  .link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+}
 
-@keyframes fade-up {
+/* The one authored moment: the portrait develops like a print in the tray. */
+@media (prefers-reduced-motion: no-preference) {
+  .develop {
+    animation: develop 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+}
+
+@keyframes develop {
   from {
-    opacity: 0;
-    transform: translateY(12px);
+    filter: brightness(1.75) contrast(0.55) saturate(0.15) blur(5px);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    filter: none;
   }
 }
 
-.hero-line {
-  animation: fade-up 500ms ease-out both;
+/* Cursor spotlight on exhibits (mouse only). */
+.spotlight {
+  position: relative;
+  isolation: isolate;
 }
-.hero-line:nth-child(1) { animation-delay: 60ms; }
-.hero-line:nth-child(2) { animation-delay: 120ms; }
-.hero-line:nth-child(3) { animation-delay: 180ms; }
-.hero-line:nth-child(4) { animation-delay: 240ms; }
-.hero-line:nth-child(5) { animation-delay: 300ms; }
-.hero-line:nth-child(6) { animation-delay: 360ms; }
-
-/* ------------------------------------------------------------------ */
-/* Scroll reveal (toggled by IntersectionObserver in components)       */
-/* ------------------------------------------------------------------ */
-
-.reveal {
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    560px circle at var(--x, 50%) var(--y, 50%),
+    rgba(169, 72, 28, 0.09),
+    transparent 62%
+  );
 }
-
-.reveal.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ------------------------------------------------------------------ */
-/* Grid texture — dark sections only                                   */
-/* ------------------------------------------------------------------ */
-
-.grid-texture {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::before {
+    opacity: 1;
+  }
 }

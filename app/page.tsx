@@ -1,20 +1,21 @@
 import Hero from "@/components/Hero";
-import Currently from "@/components/Currently";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
-import About from "@/components/About";
+import SelectedWork from "@/components/SelectedWork";
+import Timeline from "@/components/Timeline";
+import Photography from "@/components/Photography";
+import Services from "@/components/Services";
+import SideBuilds from "@/components/SideBuilds";
 import Contact from "@/components/Contact";
+import { timeline } from "@/lib/content";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Currently />
-      <Experience />
-      <Projects />
-      <Skills />
-      <About />
+      <SelectedWork />
+      <Timeline items={timeline} />
+      <Photography />
+      <Services />
+      <SideBuilds />
       <Contact />
     </>
   );
