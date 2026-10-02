@@ -279,6 +279,8 @@ export type PhotoCategory = (typeof photoCategories)[number];
 
 export type Photo = {
   slug: string;
+  /** Dominant color, used to grade backgrounds on the Life page. */
+  accent: string;
   width: number;
   height: number;
   title: string;
@@ -295,6 +297,7 @@ export type Photo = {
 export const photos: Photo[] = [
   {
     slug: "2026-two-lines",
+    accent: "#2F6FD0",
     width: 1600,
     height: 2400,
     title: "Two lines",
@@ -306,6 +309,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-notre-dame",
+    accent: "#1E4FA8",
     width: 1600,
     height: 2400,
     title: "Notre-Dame Basilica",
@@ -317,6 +321,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-crowned",
+    accent: "#B04AD0",
     width: 1600,
     height: 2400,
     title: "Crowned",
@@ -328,6 +333,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-luckys",
+    accent: "#B3261E",
     width: 1600,
     height: 2400,
     title: "Lucky’s",
@@ -339,6 +345,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-behind-the-decks",
+    accent: "#D0242A",
     width: 1600,
     height: 2400,
     title: "Behind the decks",
@@ -350,6 +357,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-transito",
+    accent: "#B8331F",
     width: 1600,
     height: 2400,
     title: "Tránsito",
@@ -361,6 +369,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-east-river",
+    accent: "#1F3E7A",
     width: 1600,
     height: 2400,
     title: "East River, blue hour",
@@ -372,6 +381,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-match-day",
+    accent: "#D3262F",
     width: 1600,
     height: 2400,
     title: "Match day",
@@ -383,6 +393,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-midtown-sunset",
+    accent: "#E59A2B",
     width: 1600,
     height: 2400,
     title: "Golden hour, Midtown",
@@ -394,6 +405,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2024-rainforest-lunch",
+    accent: "#B89A72",
     width: 1600,
     height: 2400,
     title: "Lunch in the rainforest",
@@ -405,6 +417,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2024-el-yunque-window",
+    accent: "#7C7568",
     width: 1600,
     height: 2400,
     title: "Tower window",
@@ -416,6 +429,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-rose-window",
+    accent: "#B23A48",
     width: 1600,
     height: 2400,
     title: "Rose window",
@@ -427,6 +441,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-old-san-juan",
+    accent: "#D9B44A",
     width: 1600,
     height: 2400,
     title: "The crew",
@@ -438,6 +453,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-omakase",
+    accent: "#8E2A1E",
     width: 2400,
     height: 1600,
     title: "Omakase",
@@ -449,6 +465,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-gold",
+    accent: "#C9A23F",
     width: 1600,
     height: 2400,
     title: "Gold",
@@ -460,6 +477,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-low-light",
+    accent: "#B5651D",
     width: 1600,
     height: 2400,
     title: "Low light",
@@ -471,6 +489,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-shoes-off",
+    accent: "#A88442",
     width: 1600,
     height: 2400,
     title: "Shoes off",
@@ -482,6 +501,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-cookout",
+    accent: "#E0601B",
     width: 1600,
     height: 2400,
     title: "Cookout",
@@ -493,6 +513,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-pinball",
+    accent: "#D33B2C",
     width: 1600,
     height: 2400,
     title: "Pinball",
@@ -504,6 +525,7 @@ export const photos: Photo[] = [
   },
   {
     slug: "2026-round-two",
+    accent: "#E8A317",
     width: 1600,
     height: 2400,
     title: "Round two",

@@ -6,6 +6,8 @@ import "@fontsource/zen-kaku-gothic-new/latin-400.css";
 import "@fontsource/zen-kaku-gothic-new/latin-500.css";
 import "@fontsource/zen-kaku-gothic-new/latin-700.css";
 import "@fontsource/fragment-mono/400.css";
+import "@fontsource/saira-extra-condensed/latin-700.css";
+import "@fontsource/saira-extra-condensed/latin-800.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
