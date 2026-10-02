@@ -266,26 +266,258 @@ export const sideBuilds = [
   // Add the weekend AI project here once it is live.
 ];
 
-export const photography = {
-  heading: "I also take pictures.",
+export const offTheClock = {
+  heading: "Off the clock",
   body: [
-    "When I’m not shipping software, I’m out with a Fujifilm X100VI, shooting friends, nights out, and fashion around New York.",
-    "The full archive lives on Instagram.",
+    "Outside of work, I host parties and throw events around New York, travel whenever I can, and never turn down a long dinner with friends. Weddings, cookouts, arcade nights: my camera comes to all of it.",
+    "If you want to see the photos I take, here you go.",
   ],
 };
 
+export const photoCategories = ["Travel", "Nights out", "Portraits", "City"] as const;
+export type PhotoCategory = (typeof photoCategories)[number];
+
 export type Photo = {
-  src: string;
+  slug: string;
   width: number;
   height: number;
-  alt: string;
   title: string;
-  caption: string;
+  place: string;
+  category: PhotoCategory;
+  settings: string;
+  alt: string;
+  featured: boolean;
 };
 
-// Drop exported JPGs into public/photos/ and list them here.
-// Leave this empty and the section shows only the text and links.
-export const photos: Photo[] = [];
+// Files live in public/photos as {slug}-640.webp, -1200.webp, -2400.webp.
+// Everything shot on a Fujifilm X100VI (23mm). Featured photos go in the
+// home page deck; all of them appear on /photos.
+export const photos: Photo[] = [
+  {
+    slug: "2026-two-lines",
+    width: 1600,
+    height: 2400,
+    title: "Two lines",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/5.6, 1/1800s, ISO 500",
+    alt: "Portrait in a crochet shirt holding two pink brick phones against a blue sky",
+    featured: true,
+  },
+  {
+    slug: "2026-notre-dame",
+    width: 1600,
+    height: 2400,
+    title: "Notre-Dame Basilica",
+    place: "Montréal, 2026",
+    category: "Travel",
+    settings: "f/2.0, 1/34s, ISO 1250",
+    alt: "The blue and gold nave of Notre-Dame Basilica in Montréal, a lone visitor walking up the aisle",
+    featured: true,
+  },
+  {
+    slug: "2026-crowned",
+    width: 1600,
+    height: 2400,
+    title: "Crowned",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/45s, ISO 500",
+    alt: "A friend in a gold party crown and leather jacket in a crowd lit pink and amber",
+    featured: true,
+  },
+  {
+    slug: "2026-luckys",
+    width: 1600,
+    height: 2400,
+    title: "Lucky’s",
+    place: "2026",
+    category: "City",
+    settings: "ISO 400",
+    alt: "A red storm sky over an elevated train line, with a glowing Lucky’s sign below",
+    featured: true,
+  },
+  {
+    slug: "2026-behind-the-decks",
+    width: 1600,
+    height: 2400,
+    title: "Behind the decks",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/34s, ISO 5000",
+    alt: "Two friends laughing behind a DJ booth in red light",
+    featured: true,
+  },
+  {
+    slug: "2026-transito",
+    width: 1600,
+    height: 2400,
+    title: "Tránsito",
+    place: "Old San Juan, 2026",
+    category: "Travel",
+    settings: "f/3.6, 1/180s, ISO 125",
+    alt: "A street violinist in an arched doorway on a red wall with a Tránsito sign",
+    featured: true,
+  },
+  {
+    slug: "2026-east-river",
+    width: 1600,
+    height: 2400,
+    title: "East River, blue hour",
+    place: "New York, 2026",
+    category: "City",
+    settings: "f/2.0, 1/34s, ISO 4000",
+    alt: "The Manhattan skyline at blue hour reflected in the East River",
+    featured: true,
+  },
+  {
+    slug: "2026-match-day",
+    width: 1600,
+    height: 2400,
+    title: "Match day",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.8, 1/120s, ISO 500",
+    alt: "A friend in a red striped soccer jersey grinning at a crowded watch party",
+    featured: true,
+  },
+  {
+    slug: "2026-midtown-sunset",
+    width: 1600,
+    height: 2400,
+    title: "Golden hour, Midtown",
+    place: "New York, 2026",
+    category: "City",
+    settings: "f/2.5, 1/105s, ISO 125",
+    alt: "Low sun burning down a Midtown street between towers",
+    featured: true,
+  },
+  {
+    slug: "2024-rainforest-lunch",
+    width: 1600,
+    height: 2400,
+    title: "Lunch in the rainforest",
+    place: "2024",
+    category: "Portraits",
+    settings: "f/2.5, 1/110s, ISO 500",
+    alt: "A friend in a cap and round glasses mid-bite of a sandwich against deep green leaves",
+    featured: true,
+  },
+  {
+    slug: "2024-el-yunque-window",
+    width: 1600,
+    height: 2400,
+    title: "Tower window",
+    place: "2024",
+    category: "Travel",
+    settings: "f/5.6, 1/1600s, ISO 500",
+    alt: "A stone arch window looking out on palms disappearing into fog",
+    featured: false,
+  },
+  {
+    slug: "2026-rose-window",
+    width: 1600,
+    height: 2400,
+    title: "Rose window",
+    place: "Montréal, 2026",
+    category: "Travel",
+    settings: "f/2.0, 1/34s, ISO 800",
+    alt: "Looking straight up at a glowing rose window in a starred ceiling",
+    featured: false,
+  },
+  {
+    slug: "2026-old-san-juan",
+    width: 1600,
+    height: 2400,
+    title: "The crew",
+    place: "Old San Juan, 2026",
+    category: "Travel",
+    settings: "f/3.2, 1/180s, ISO 125",
+    alt: "A group of friends walking single file down a sidewalk in Old San Juan",
+    featured: false,
+  },
+  {
+    slug: "2026-omakase",
+    width: 2400,
+    height: 1600,
+    title: "Omakase",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/34s, ISO 640",
+    alt: "Two pieces of sushi on ceramic plates at a dim counter, a single light above",
+    featured: false,
+  },
+  {
+    slug: "2026-gold",
+    width: 1600,
+    height: 2400,
+    title: "Gold",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/2.5, 1/110s, ISO 125",
+    alt: "Close-up of a wide smile with a single gold grill",
+    featured: false,
+  },
+  {
+    slug: "2026-low-light",
+    width: 1600,
+    height: 2400,
+    title: "Low light",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/2.0, 1/20s, ISO 12800",
+    alt: "A friend smiling in warm, dim bar light",
+    featured: false,
+  },
+  {
+    slug: "2026-shoes-off",
+    width: 1600,
+    height: 2400,
+    title: "Shoes off",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/5s, ISO 12800",
+    alt: "A pair of lace-up flats left on the grass at dusk",
+    featured: false,
+  },
+  {
+    slug: "2026-cookout",
+    width: 1600,
+    height: 2400,
+    title: "Cookout",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/60s, ISO 10000",
+    alt: "Friends around a flaming grill at night with the Manhattan skyline behind",
+    featured: false,
+  },
+  {
+    slug: "2026-pinball",
+    width: 1600,
+    height: 2400,
+    title: "Pinball",
+    place: "Barcade, 2026",
+    category: "Nights out",
+    settings: "f/3.6, 1/50s, ISO 400",
+    alt: "A friend in a striped shirt leaning into a pinball machine at an arcade bar",
+    featured: false,
+  },
+  {
+    slug: "2026-round-two",
+    width: 1600,
+    height: 2400,
+    title: "Round two",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/3.6, 1/50s, ISO 400",
+    alt: "Two friends playing a vintage fighting game at an arcade cabinet",
+    featured: false,
+  },
+];
+
+export const photoSrc = (slug: string, size: 640 | 1200 | 2400) => `/photos/${slug}-${size}.webp`;
+export const photoSrcSet = (slug: string) =>
+  `${photoSrc(slug, 640)} 640w, ${photoSrc(slug, 1200)} 1200w, ${photoSrc(slug, 2400)} 2400w`;
 
 export const toolkit = [
   {

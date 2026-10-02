@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 
 const RAMP = " .:-=+/;(<{[*#%@";
 const NOISE = "{}()<>[];:/=+*#";
-const BG = "#201B18";
+const BG = "#17181A";
 
 // Head-and-shoulders crop of the source, as fractions of its width/height.
 const CROP = { x: 0.145, y: 0.16, w: 0.578, h: 0.578 };
@@ -71,7 +71,7 @@ export default function GlyphPortrait({ src, alt }: Props) {
       canvas.width = layer.width = Math.round(size * dpr);
       canvas.height = layer.height = Math.round(size * dpr);
       // Smaller glyphs only where the screen can render them crisply.
-      cell = Math.max(5, Math.round(size / (dpr >= 2 ? 96 : 78)));
+      cell = Math.max(5, Math.round(size / 92));
       cols = Math.floor(size / cell);
       rows = cols;
       crop = {
@@ -116,7 +116,7 @@ export default function GlyphPortrait({ src, alt }: Props) {
           // Mix global tone with local detail so the face reads against
           // the bright wall and shirt.
           const v = Math.min(1, Math.max(0, 0.75 * lum + 0.125 + 1.6 * (lum - lumOf(blur, k))));
-          if (v < 0.26) continue;
+          if (v < 0.22) continue;
           let r = data[k];
           let g = data[k + 1];
           let b = data[k + 2];
@@ -158,7 +158,18 @@ export default function GlyphPortrait({ src, alt }: Props) {
       setFont();
     };
 
-    // Incremental reveal: glyphs land in ember first, then settle into
+    // On 1x screens thin glyph strokes wash out, so give them a hairline stroke.
+    const paint = (c: (typeof cells)[number]) => {
+      lctx.fillStyle = c.color;
+      lctx.fillText(c.ch, c.x, c.y);
+      if (dpr < 2) {
+        lctx.strokeStyle = c.color;
+        lctx.lineWidth = 0.6;
+        lctx.strokeText(c.ch, c.x, c.y);
+      }
+    };
+
+    // Incremental reveal: glyphs land in chrome-light first, then settle into
     // the photo's own color on the next frame.
     let pending: typeof cells = [];
     const drawUpTo = (progress: number) => {
@@ -167,8 +178,7 @@ export default function GlyphPortrait({ src, alt }: Props) {
       for (const c of pending) {
         lctx.fillStyle = BG;
         lctx.fillRect(c.x - cell / 2, c.y - cell / 2, cell, cell);
-        lctx.fillStyle = c.color;
-        lctx.fillText(c.ch, c.x, c.y);
+        paint(c);
       }
       pending = [];
       const target = Math.floor(cells.length * progress);
@@ -176,10 +186,9 @@ export default function GlyphPortrait({ src, alt }: Props) {
       for (; drawn < target; drawn++) {
         const c = cells[drawn];
         if (settleNow) {
-          lctx.fillStyle = c.color;
-          lctx.fillText(c.ch, c.x, c.y);
+          paint(c);
         } else {
-          lctx.fillStyle = "rgba(226,131,78,0.9)";
+          lctx.fillStyle = "rgba(201,205,209,0.9)";
           lctx.fillText(NOISE[(Math.random() * NOISE.length) | 0], c.x, c.y);
           pending.push(c);
         }
@@ -200,8 +209,8 @@ export default function GlyphPortrait({ src, alt }: Props) {
         if (lens.r < size * 0.9) {
           ctx.beginPath();
           ctx.arc(lens.x, lens.y, lens.r, 0, Math.PI * 2);
-          ctx.strokeStyle = "rgba(226,131,78,0.9)";
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = "rgba(244,246,247,0.95)";
+          ctx.lineWidth = 1.5;
           ctx.stroke();
         }
       }
@@ -312,7 +321,8 @@ export default function GlyphPortrait({ src, alt }: Props) {
 
   return (
     <div>
-      <div ref={wrapRef} className="relative aspect-square w-full overflow-hidden bg-charcoal">
+      <div className="chrome-bezel p-[5px] shadow-[0_30px_60px_-30px_rgba(27,26,24,0.55)]">
+      <div ref={wrapRef} className="relative aspect-square w-full overflow-hidden bg-graphite">
         <canvas
           ref={canvasRef}
           role="img"
@@ -321,13 +331,14 @@ export default function GlyphPortrait({ src, alt }: Props) {
           className="absolute inset-0 h-full w-full cursor-crosshair"
         />
       </div>
-      <div className="mt-3 flex items-baseline justify-between gap-6 border-t border-bone/70 pt-2.5">
-        <span className="whitespace-nowrap text-[0.95rem] text-bone">Bassey Duke</span>
+      </div>
+      <div className="mt-3 flex items-baseline justify-between gap-6 border-t border-ink/70 pt-2.5">
+        <span className="whitespace-nowrap text-[0.95rem] text-ink">Bassey Duke</span>
         <button
           type="button"
           onClick={toggle}
           aria-pressed={developed}
-          className="label text-smoke transition-colors duration-200 hover:text-ember-light"
+          className="label text-stone transition-colors duration-200 hover:text-steel"
         >
           {developed ? "Back to code" : finePointer ? "Hover to develop" : "Tap to develop"}
         </button>
