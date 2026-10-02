@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { site } from "@/lib/content";
 
 const links = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#photos", label: "Photos" },
-  { href: "#services", label: "Services" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#off-the-clock", label: "Off the clock" },
+  { href: "/photos", label: "Photos" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -30,20 +30,16 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className={`on-dark sticky top-0 z-40 bg-charcoal text-bone transition-[border-color] duration-200 ${
-        scrolled || open ? "border-b border-charcoal-rule" : "border-b border-transparent"
-      }`}
-    >
+    <header className="sticky top-0 z-40 bg-ground">
       <nav className="page flex h-16 items-center justify-between" aria-label="Main">
-        <a href="#top" className="font-display text-[1.35rem] tracking-[-0.01em]">
+        <a href="/" className="font-display text-[1.3rem] font-medium tracking-[-0.01em]">
           Bassey Duke
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="text-[1rem] text-smoke transition-colors duration-200 hover:text-bone">
+              <a href={l.href} className="text-[0.975rem] text-stone transition-colors duration-200 hover:text-ink">
                 {l.label}
               </a>
             </li>
@@ -53,7 +49,7 @@ export default function Navbar() {
               href={site.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-bone/70 px-4 py-1.5 text-[1rem] transition-colors duration-200 hover:bg-bone hover:text-charcoal"
+              className="border border-ink/80 px-4 py-1.5 text-[0.975rem] transition-colors duration-200 hover:bg-ink hover:text-paper"
             >
               Résumé
             </a>
@@ -62,7 +58,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="label -mr-2 px-2 py-2 md:hidden"
+          className="-mr-2 px-2 py-2 text-[0.95rem] font-medium md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
@@ -71,14 +67,19 @@ export default function Navbar() {
         </button>
       </nav>
 
+      <div
+        aria-hidden
+        className={`chrome h-px w-full transition-opacity duration-300 ${scrolled || open ? "opacity-100" : "opacity-0"}`}
+      />
+
       {open && (
         <ul id="mobile-menu" className="page pb-6 md:hidden">
           {[...links, { href: site.resume, label: "Résumé" }].map((l) => (
-            <li key={l.href} className="border-t border-charcoal-rule">
+            <li key={l.href} className="border-b border-rule">
               <a
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block py-3.5 font-display text-[1.6rem]"
+                className="block py-3.5 font-display text-[1.5rem] font-medium"
                 {...(l.label === "Résumé" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {l.label}

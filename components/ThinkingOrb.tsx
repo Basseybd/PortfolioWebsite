@@ -8,6 +8,8 @@ const ENERGY: Record<OrbState, number> = { idle: 0.08, typing: 0.5, thinking: 1,
 
 const VERT = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
 
+// A liquid chrome sphere, like a drop of mercury or an Arco lamp shade.
+// It reflects a simple studio: bright sky, a dark horizon, graphite below.
 const FRAG = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
@@ -31,45 +33,50 @@ float noise(vec2 p) {
 }
 float fbm(vec2 p) {
   float v = 0.0; float a = 0.5;
-  for (int i = 0; i < 5; i++) { v += a * noise(p); p = p * 2.02 + 3.1; a *= 0.5; }
+  for (int i = 0; i < 4; i++) { v += a * noise(p); p = p * 2.03 + 1.7; a *= 0.5; }
   return v;
+}
+
+vec3 env(vec3 d) {
+  float y = d.y;
+  vec3 sky = mix(vec3(0.60, 0.64, 0.66), vec3(0.97, 0.98, 0.98), smoothstep(0.0, 0.85, y));
+  vec3 ground = mix(vec3(0.10, 0.10, 0.11), vec3(0.42, 0.44, 0.46), smoothstep(-0.05, -0.9, y));
+  vec3 c = y > 0.0 ? sky : ground;
+  c = mix(c, vec3(0.07, 0.06, 0.05), exp(-abs(y) * 22.0) * 0.85);
+  // Two softboxes give the chrome its highlights.
+  c += vec3(1.0) * smoothstep(0.32, 0.0, length(d.xy - vec2(-0.48, 0.58))) * 0.9;
+  c += vec3(0.9, 0.93, 0.95) * smoothstep(0.18, 0.0, length(d.xy - vec2(0.62, 0.34))) * 0.45;
+  return c;
 }
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * r) / min(r.x, r.y);
   float d = length(uv);
-  float a = atan(uv.y, uv.x);
+  float ang = atan(uv.y, uv.x);
 
-  // Morphing silhouette: calm when idle, restless when thinking.
-  float wob = fbm(vec2(cos(a), sin(a)) * 1.3 + t * (0.25 + 0.6 * e));
-  float rad = 0.31 + 0.018 * sin(a * 3.0 + t * 0.7) + (0.02 + 0.06 * e) * (wob - 0.5);
-  float body = smoothstep(rad, rad - 0.01, d);
+  float wob = fbm(vec2(cos(ang), sin(ang)) * 1.4 + t * (0.2 + 0.7 * e));
+  float rad = 0.30 + 0.006 * sin(ang * 3.0 + t * 0.6) + (0.008 + 0.045 * e) * (wob - 0.5);
+  float body = smoothstep(rad, rad - 0.006, d);
 
-  // Liquid interior: warm plasma swirling inside a lit glass sphere.
-  vec2 q = uv * 2.2;
-  float s = fbm(q + vec2(t * 0.18, -t * 0.12));
-  float s2 = fbm(q * 1.5 - vec2(s * 2.0) + vec2(-t * 0.1, t * 0.16));
-  vec3 deep = vec3(0.55, 0.19, 0.06);
-  vec3 ember = vec3(0.886, 0.514, 0.306);
-  vec3 glow = vec3(1.0, 0.78, 0.55);
-  vec3 bone = vec3(0.98, 0.95, 0.91);
-  vec3 col = mix(deep, ember, smoothstep(0.2, 0.7, s2));
-  col = mix(col, glow, smoothstep(0.55, 0.9, s2) * (0.5 + 0.5 * e));
-  col = mix(col, bone, pow(smoothstep(0.5, 0.95, s), 2.0) * (0.35 + 0.4 * e));
+  vec2 p = uv / rad;
+  float z = sqrt(max(0.0, 1.0 - dot(p, p)));
+  vec3 n = normalize(vec3(p, z));
+  float amt = 0.12 + 0.55 * e;
+  vec2 q = p * 2.0 + vec2(t * 0.22, -t * 0.17);
+  n = normalize(n + vec3(fbm(q) - 0.5, fbm(q + 7.3) - 0.5, 0.0) * amt);
 
-  // Sphere lighting: bright core, darker limb, a soft specular highlight.
-  float z = sqrt(max(0.0, 1.0 - pow(d / rad, 2.0)));
-  col *= 0.55 + 0.6 * z;
-  float spec = pow(smoothstep(0.17, 0.0, length(uv - vec2(-0.1, 0.12))), 2.0) * 0.55;
-  col += spec * bone;
-  float rim = smoothstep(rad - 0.035, rad, d) * body;
-  col = mix(col, glow, rim * 0.55);
+  vec3 rf = reflect(vec3(0.0, 0.0, -1.0), n);
+  vec3 col = env(rf);
+  float fres = pow(1.0 - z, 2.5);
+  col = mix(col, vec3(0.83, 0.85, 0.86), fres * 0.35);
 
-  // Halo breathes with energy.
-  float halo = exp(-max(d - rad, 0.0) * (9.0 - 4.0 * e)) * (0.22 + 0.4 * e) * (1.0 - body);
+  // Soft contact shadow under the sphere.
+  float sy = uv.y + rad * 1.06;
+  float shadow = exp(-sy * sy / 0.0009) * exp(-uv.x * uv.x / (rad * rad * 0.55)) * 0.45;
 
-  float alpha = max(body, halo);
-  gl_FragColor = vec4(mix(ember * 1.05, col, body), alpha);
+  float alpha = max(body, shadow * (1.0 - body));
+  vec3 outc = mix(vec3(0.20, 0.21, 0.22), col, body);
+  gl_FragColor = vec4(outc, alpha);
 }
 `;
 
