@@ -266,12 +266,22 @@ export const sideBuilds = [
   // Add the weekend AI project here once it is live.
 ];
 
+// The short band on /work that points to /life.
 export const offTheClock = {
   heading: "Off the clock",
-  body: [
-    "Outside of work, I host parties and throw events around New York, travel whenever I can, and never turn down a long dinner with friends. Weddings, cookouts, arcade nights: my camera comes to all of it.",
-    "If you want to see the photos I take, here you go.",
-  ],
+  body: "I also take photos. Trips, long dinners with friends, and New York after dark.",
+  cta: "See my photos",
+};
+
+// /life: quick and short.
+export const life = {
+  kicker: "Life, off the clock",
+  hello: "Hey, I’m Bassey.",
+  lead: "I write software for a living and take photos on the side.",
+  body: "Mostly trips, long dinners with friends, and New York after dark, all on a Fujifilm X100VI. Here’s some of my favorite work.",
+  booking: "Want photos like these? I take on a few portrait and event shoots around New York.",
+  bookingCta: "Book a shoot",
+  bookingSubject: "Photo shoot",
 };
 
 export const photoCategories = ["Travel", "Nights out", "Portraits", "City"] as const;
@@ -279,7 +289,7 @@ export type PhotoCategory = (typeof photoCategories)[number];
 
 export type Photo = {
   slug: string;
-  /** Dominant color, used to grade backgrounds on the Life page. */
+  /** Dominant color. Floods the screen when you step through the Life door. */
   accent: string;
   width: number;
   height: number;
@@ -292,8 +302,8 @@ export type Photo = {
 };
 
 // Files live in public/photos as {slug}-640.webp, -1200.webp, -2400.webp.
-// Everything shot on a Fujifilm X100VI (23mm). Featured photos go in the
-// home page deck; all of them appear on /photos.
+// Everything shot on a Fujifilm X100VI (23mm). Featured photos fill the Life
+// door on the landing page and the deck on /life; all of them appear on /photos.
 export const photos: Photo[] = [
   {
     slug: "2026-two-lines",

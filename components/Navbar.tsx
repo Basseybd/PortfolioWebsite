@@ -1,15 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/content";
+import { WorldLink } from "@/components/transition/WorldTransition";
+import { photos, site } from "@/lib/content";
 
 const links = [
-  { href: "/#work", label: "Work" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#off-the-clock", label: "Off the clock" },
-  { href: "/photos", label: "Photos" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/work#work", label: "Work" },
+  { href: "/work#experience", label: "Experience" },
+  { href: "/work#services", label: "Services" },
+  { href: "/work#contact", label: "Contact" },
 ];
+const lifeColor = photos.find((p) => p.featured)?.accent;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,18 +34,28 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-ground">
       <nav className="page flex h-16 items-center justify-between" aria-label="Main">
-        <a href="/" className="font-display text-[1.3rem] font-medium tracking-[-0.01em]">
+        <Link href="/" className="font-display text-[1.3rem] font-medium tracking-[-0.01em]">
           Bassey Duke
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="text-[0.975rem] text-stone transition-colors duration-200 hover:text-ink">
+              <Link href={l.href} className="text-[0.975rem] text-stone transition-colors duration-200 hover:text-ink">
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
+          <li>
+            <WorldLink
+              href="/life"
+              world="life"
+              color={lifeColor}
+              className="text-[0.975rem] text-stone transition-colors duration-200 hover:text-ink"
+            >
+              Life
+            </WorldLink>
+          </li>
           <li>
             <a
               href={site.resume}
@@ -74,18 +86,35 @@ export default function Navbar() {
 
       {open && (
         <ul id="mobile-menu" className="page pb-6 md:hidden">
-          {[...links, { href: site.resume, label: "Résumé" }].map((l) => (
+          {links.map((l) => (
             <li key={l.href} className="border-b border-rule">
-              <a
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-3.5 font-display text-[1.5rem] font-medium"
-                {...(l.label === "Résumé" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
+              <Link href={l.href} onClick={() => setOpen(false)} className="block py-3.5 font-display text-[1.5rem] font-medium">
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
+          <li className="border-b border-rule">
+            <WorldLink
+              href="/life"
+              world="life"
+              color={lifeColor}
+              onClick={() => setOpen(false)}
+              className="block py-3.5 font-display text-[1.5rem] font-medium"
+            >
+              Life
+            </WorldLink>
+          </li>
+          <li className="border-b border-rule">
+            <a
+              href={site.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="block py-3.5 font-display text-[1.5rem] font-medium"
+            >
+              Résumé
+            </a>
+          </li>
         </ul>
       )}
     </header>
