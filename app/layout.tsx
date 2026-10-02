@@ -1,16 +1,40 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Bassey Duke | Software Engineer",
+  title: "Bassey Duke, Senior Software Engineer",
   description:
-    "Full-stack developer specializing in React, Next.js, and modern web technologies",
+    "Senior Software Engineer with 7+ years across fintech, consulting, and healthcare. Modernizing frontend platforms and shipping AI infrastructure at Capital One.",
+  openGraph: {
+    title: "Bassey Duke, Senior Software Engineer",
+    description:
+      "Senior Software Engineer with 7+ years across fintech, consulting, and healthcare. Modernizing frontend platforms and shipping AI infrastructure at Capital One.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -19,11 +43,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-black text-gray-200`}>
+    <html
+      lang="en"
+      className={`${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="bg-cream font-sans text-primary antialiased">
         <Navbar />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );
