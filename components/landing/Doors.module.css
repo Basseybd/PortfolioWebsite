@@ -35,8 +35,7 @@
 }
 .where {
   margin: 0;
-  font-family: "Fragment Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1;
   color: #585b5e;
 }
@@ -133,13 +132,9 @@
   right: var(--pad-sm);
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
-  font-family: "Fragment Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
   line-height: 1.45;
-  color: rgba(236, 237, 235, 0.8);
-  font-variant-numeric: tabular-nums;
 }
 .caption {
   display: flex;
@@ -188,17 +183,17 @@
 }
 .arrow {
   display: inline-block;
-  font-family: "Zen Kaku Gothic New", system-ui, sans-serif;
-  font-size: 0.42em;
-  letter-spacing: 0;
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
   color: rgba(236, 237, 235, 0.72);
-  transform: translate3d(0, -0.2em, 0);
+  transform: translate3d(0, -0.06em, 0);
   transition: transform 0.6s var(--ease-out), color 0.3s ease;
 }
 .doors[data-active="work"] .work .arrow,
 .doors[data-active="life"] .life .arrow {
   color: #f4f5f3;
-  transform: translate3d(0.35em, -0.2em, 0);
+  transform: translate3d(0.35em, -0.06em, 0);
 }
 .line {
   display: block;
@@ -344,9 +339,6 @@
   .line {
     font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
     white-space: nowrap;
-  }
-  .meta {
-    font-size: 0.78rem;
   }
   .caption {
     font-size: 0.8125rem;

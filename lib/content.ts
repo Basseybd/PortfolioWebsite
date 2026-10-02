@@ -275,7 +275,6 @@ export const offTheClock = {
 
 // /life: quick and short.
 export const life = {
-  kicker: "Life, off the clock",
   hello: "Hey, I’m Bassey.",
   lead: "I write software for a living and take photos on the side.",
   body: "Mostly trips, long dinners with friends, and New York after dark, all on a Fujifilm X100VI. Here’s some of my favorite work.",

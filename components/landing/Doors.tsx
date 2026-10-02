@@ -74,12 +74,9 @@ export default function Doors({ workHref = "/work", lifeHref = "/life", ready = 
           onBlur={onBlur("work")}
         >
           <PixelField mode="work" active={active === "work"} className={styles.pixels} />
-          <span className={styles.meta} aria-hidden="true">
-            <span>01</span>
-          </span>
           <span className={styles.copy}>
             <span className={styles.word}>
-              Work <span className={styles.arrow}>&rarr;</span>
+              Work <Arrow />
             </span>
             <span className={styles.line}>Software engineer. AI features, production systems.</span>
           </span>
@@ -104,7 +101,6 @@ export default function Doors({ workHref = "/work", lifeHref = "/life", ready = 
           />
           <span className={styles.shade} aria-hidden="true" />
           <span className={styles.meta} aria-hidden="true">
-            <span>02</span>
             <span key={current.slug} className={styles.caption}>
               {current.title}
               {current.place ? <span>{current.place}</span> : null}
@@ -112,7 +108,7 @@ export default function Doors({ workHref = "/work", lifeHref = "/life", ready = 
           </span>
           <span className={styles.copy}>
             <span className={styles.word}>
-              Life <span className={styles.arrow}>&rarr;</span>
+              Life <Arrow />
             </span>
             <span className={styles.line}>Photos on the side. Travel, friends, New York.</span>
           </span>
@@ -131,5 +127,13 @@ export default function Doors({ workHref = "/work", lifeHref = "/life", ready = 
         </ul>
       </footer>
     </section>
+  );
+}
+
+function Arrow() {
+  return (
+    <svg className={styles.arrow} viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
+      <path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

@@ -61,8 +61,7 @@ export default function LifePage() {
         className="page grid gap-y-14 pb-24 pt-8 sm:pt-12 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-12 lg:content-center lg:gap-x-12 lg:gap-y-9 lg:pb-20 lg:pt-6"
       >
         <div className="lg:col-span-5 lg:row-start-1 lg:self-end">
-          <p className="label text-silver">{life.kicker}</p>
-          <h1 className="mt-4 font-display text-[clamp(3.1rem,9vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.025em]">
+          <h1 className="font-display text-[clamp(3.1rem,9vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.025em]">
             {life.hello}
           </h1>
           <div aria-hidden className="chrome mt-8 h-[2px] w-24" />
