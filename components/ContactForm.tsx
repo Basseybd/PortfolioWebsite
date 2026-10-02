@@ -1,75 +1,106 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
+import ThinkingOrb, { type OrbState } from "@/components/ThinkingOrb";
+
+const field =
+  "mt-1 w-full border-0 border-b border-ink/30 bg-transparent px-0 py-2.5 text-[1.0625rem] text-ink placeholder:text-steel/80 transition-colors duration-200 hover:border-ink/60 focus:border-ink focus:outline-none focus:ring-0";
+
+const errorClass = "mt-1.5 block text-[0.9rem] font-medium text-ink underline decoration-ink/40";
+
+const STATUS: Record<OrbState, string> = {
+  idle: "Ready when you are",
+  typing: "Reading along…",
+  thinking: "Sending…",
+  done: "Message received",
+};
+
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xoqzrlko");
-  if (state.succeeded) {
-    return <p>Thank you for your message! We will be in touch soon!</p>;
-  }
+  const [typing, setTyping] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
+
+  const onInput = () => {
+    setTyping(true);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setTyping(false), 1400);
+  };
+
+  const orbState: OrbState = state.succeeded
+    ? "done"
+    : state.submitting
+      ? "thinking"
+      : typing
+        ? "typing"
+        : "idle";
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="hidden" name="form-name" value="contact" />
-      <input
-        type="hidden"
-        name="subject"
-        value="Contact me form filled from basseyolaoluduke.com"
-      />
-      <h2 className="text-white text-2xl font-bold mb-5">Contact Me</h2>
-      <p className="leading-relaxed mb-5">
-        If you&apos;re looking for a reliable and skilled developer to help
-        bring your project to life, get in touch with me today.
-      </p>
-      <div className="mb-3">
-        <label htmlFor="name" className="block text-gray-400 font-medium mb-1">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-2 px-3 transition-colors duration-200 ease-in-out"
-          required
-        />
-        <ValidationError prefix="Name" field="name" errors={state.errors} />
+    <div>
+      <div className="mb-8 flex items-center gap-3">
+        <div className="-ml-6 h-36 w-36 shrink-0 sm:h-44 sm:w-44">
+          <ThinkingOrb state={orbState} />
+        </div>
+        <p role="status" aria-live="polite" className="text-[0.95rem] text-steel">
+          {STATUS[orbState]}
+        </p>
       </div>
-      <div className="mb-3">
-        <label htmlFor="email" className="block text-gray-400 font-medium mb-1">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-2 px-3 transition-colors duration-200 ease-in-out"
-          required
-        />
-        <ValidationError prefix="Email" field="email" errors={state.errors} />
-      </div>
-      <div className="relative mb-4">
-        <label
-          htmlFor="message"
-          className="block text-gray-400 font-medium mb-1"
-        >
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-          required
-        />
-        <ValidationError
-          prefix="Message"
-          field="message"
-          errors={state.errors}
-        />
-      </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
-      >
-        Submit
-      </button>
-    </form>
+
+      {state.succeeded ? (
+        <p className="font-display text-[1.75rem] font-medium leading-snug">
+          Message sent. I&rsquo;ll reply to the email you gave within two business days.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit} onInput={onInput} className="space-y-8">
+          <input type="hidden" name="_subject" value="New project inquiry from basseyduke.io" />
+          <div className="grid gap-8 sm:grid-cols-2">
+            <label className="block">
+              <span className="text-[0.9rem] text-steel">Name</span>
+              <input name="name" type="text" autoComplete="name" required placeholder="Your name…" className={field} />
+              <ValidationError prefix="Name" field="name" errors={state.errors} className={errorClass} />
+            </label>
+            <label className="block">
+              <span className="text-[0.9rem] text-steel">Email</span>
+              <input
+                name="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                spellCheck={false}
+                required
+                placeholder="you@company.com"
+                className={field}
+              />
+              <ValidationError prefix="Email" field="email" errors={state.errors} className={errorClass} />
+            </label>
+          </div>
+          <label className="block">
+            <span className="text-[0.9rem] text-steel">Project details</span>
+            <textarea
+              name="message"
+              rows={5}
+              required
+              placeholder="What you’re building, what’s stuck, and when you need it…"
+              className={`${field} resize-y`}
+            />
+            <ValidationError prefix="Message" field="message" errors={state.errors} className={errorClass} />
+          </label>
+          <div aria-live="polite">
+            <ValidationError errors={state.errors} className={errorClass} />
+          </div>
+          <button
+            type="submit"
+            disabled={state.submitting}
+            className="bg-ink px-7 py-3.5 text-[1rem] font-medium text-paper transition-colors duration-200 hover:bg-steel disabled:cursor-wait disabled:opacity-70"
+          >
+            {state.submitting ? "Sending…" : "Send message"}
+          </button>
+        </form>
+      )}
+    </div>
   );
 }

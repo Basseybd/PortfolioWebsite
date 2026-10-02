@@ -1,0 +1,582 @@
+// Single source for every claim on the site.
+// Mirrors the Career Fact Sheet (public-safe version). Do not add metrics
+// that are not in the fact sheet. No internal Capital One names or counts.
+
+export const site = {
+  name: "Bassey Duke",
+  role: "Senior Software Engineer",
+  email: "bassey.bd@gmail.com",
+  location: "New York, NY",
+  resume:
+    "https://bassey-duke-static-files.s3.us-east-2.amazonaws.com/Bassey+Duke's+Resume.pdf",
+  linkedin: "https://www.linkedin.com/in/basseyduke/",
+  github: "https://github.com/Basseybd",
+  instagram: "https://www.instagram.com/bassey.bd/",
+  instagramHandle: "@bassey.bd",
+  photoArchive: "https://www.instagram.com/bassey.archive/",
+  photoArchiveHandle: "@bassey.archive",
+  url: "https://www.basseyduke.io",
+};
+
+export const portrait = {
+  src: "/bassey-duke.jpg",
+  srcSmall: "/bassey-duke-1200.jpg",
+  width: 2075,
+  height: 2075,
+  alt: "Bassey Duke smiling in a white shirt beside an orange globe lamp, photographed on film with flash",
+  title: "Bassey Duke",
+  caption: "Film scan, rendered in code",
+};
+
+export type Milestone = {
+  year: string;
+  title: string;
+  org: string;
+  detail: string;
+};
+
+// Chronological. Promotion years are approximate (see the fact sheet).
+export const timeline: Milestone[] = [
+  {
+    year: "2017",
+    title: "Software Engineer",
+    org: "Philadelphia Parking Authority",
+    detail: "Redesigned a JavaScript UI. Python automation cut processing from days to minutes.",
+  },
+  {
+    year: "2018",
+    title: "Reliability Engineer Intern",
+    org: "Comcast",
+    detail: "Integrated React into a legacy codebase and brought test coverage to 99%.",
+  },
+  {
+    year: "2020",
+    title: "B.S. Computer Science, AI",
+    org: "Drexel University",
+    detail: "Concentration in Artificial Intelligence. AJ Drexel Scholarship.",
+  },
+  {
+    year: "2021",
+    title: "Software Engineer",
+    org: "Accenture",
+    detail: "Replaced HP LoadRunner with JMeter for 150+ teams, saving $2M+ a year. COVID-19 outreach platform for 1M+ patients.",
+  },
+  {
+    year: "2022",
+    title: "Software Engineer II",
+    org: "Accenture",
+    detail: "Generative AI website platform for Accenture Song, $100M+ in revenue within 6 months. Led the move to Amazon EKS.",
+  },
+  {
+    year: "2025",
+    title: "Program Director",
+    org: "Africode",
+    detail: "Appointed by the CEO to run mentorship: 12 mentors, 36 mentees, 4 countries.",
+  },
+  {
+    year: "2025",
+    title: "Senior Software Engineer",
+    org: "Accenture",
+    detail: "Second promotion. Client engagement for a big tech company.",
+  },
+  {
+    year: "2025",
+    title: "Senior Software Engineer",
+    org: "Capital One",
+    detail: "AI features in production, a 67% cut in forced logouts, and builds from minutes to seconds.",
+  },
+];
+
+export type Work = {
+  verb: string;
+  title: string;
+  outcome: string;
+  detail: string;
+  stack: string[];
+};
+
+export const selectedWork: Work[] = [
+  {
+    verb: "Led full-stack integration",
+    title: "AI message assistant",
+    outcome: "Live in production with real users.",
+    detail:
+      "Reviews outgoing messages for typos, wrong information, and sensitive data before they go out. I built the human-in-the-loop review interface, the REST APIs behind it, and the MySQL data layer.",
+    stack: ["LLM integration", "React", "Node.js", "MySQL"],
+  },
+  {
+    verb: "Co-built, 9-person team",
+    title: "Preference-aware chat prototype",
+    outcome: "2nd place in an org-wide hackathon.",
+    detail:
+      "A Claude prototype that picks up user preferences from conversations and asks the follow-up a good person would. Mention seafood, and it asks what kind. The design moved on to production teams.",
+    stack: ["Claude", "TypeScript", "Prompt design"],
+  },
+  {
+    verb: "Led",
+    title: "Session reliability fix",
+    outcome: "Forced logouts down 67%.",
+    detail:
+      "Users were getting signed out mid-task. I traced it to four separate root causes in the session lifecycle using log analysis, then fixed each one, including a cross-tab sync so open tabs stop fighting each other.",
+    stack: ["AWS CloudWatch", "Redis", "Node.js", "React"],
+  },
+  {
+    verb: "Delivered",
+    title: "Build migration",
+    outcome: "Builds from about 5 minutes to about 2 seconds.",
+    detail:
+      "Evaluated 8 build tools, then moved a Create React App codebase to Rsbuild (Rspack and SWC). Upgraded TypeScript to 5.4.5 and cleared high-severity CVEs along the way.",
+    stack: ["Rsbuild", "Rspack", "SWC", "TypeScript"],
+  },
+  {
+    verb: "Led",
+    title: "React upgrade with coding agents",
+    outcome: "React 18.3 across 79 files, all tests passing.",
+    detail:
+      "Ran the refactors with Claude Code agents, covering React Router v6 and React Redux v8. Now leading the Draft.js to Tiptap editor migration that unblocks React 19.",
+    stack: ["Claude Code", "React", "Tiptap"],
+  },
+];
+
+export type Role = {
+  title: string;
+  dates: string;
+  points: string[];
+};
+
+export type Job = {
+  company: string;
+  place: string;
+  dates: string;
+  note?: string;
+  roles: Role[];
+};
+
+export const experience: Job[] = [
+  {
+    company: "Capital One",
+    place: "New York",
+    dates: "Aug 2025 - Present",
+    roles: [
+      {
+        title: "Senior Software Engineer",
+        dates: "Aug 2025 - Present",
+        points: [
+          "Led full-stack integration of a live AI assistant with human-in-the-loop review.",
+          "Led the session reliability fix that cut forced logouts by 67%.",
+          "Migrated the build to Rsbuild, from about 5 minutes to about 2 seconds.",
+          "Automated weekly branch syncs across 10 repos. Co-managed releases with zero post-release incidents.",
+          "Mentor junior engineers on AWS Lambda.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Accenture",
+    place: "Promoted twice",
+    dates: "Feb 2021 - Aug 2025",
+    roles: [
+      {
+        title: "Senior Software Engineer",
+        dates: "2025",
+        points: [
+          "Client engagement for a big tech company, coordinating delivery and client calls.",
+        ],
+      },
+      {
+        title: "Software Engineer II",
+        dates: "2022 - 2025",
+        points: [
+          "Generative AI prompt-to-website platform for Accenture Song, which supported $100M+ in revenue within 6 months.",
+          "Led the move from Elastic Beanstalk to Amazon EKS, eliminating production downtime.",
+          "Moved the codebase from JavaScript to TypeScript, standardized on Chakra UI, and set up CI/CD across 4 environments. QA cycles down 40%.",
+        ],
+      },
+      {
+        title: "Software Engineer",
+        dates: "2021 - 2022",
+        points: [
+          "Replaced HP LoadRunner with open-source JMeter on Amazon ECR and EKS. Adopted by 150+ teams, saving $2M+ a year in licensing.",
+          "Built a full-stack COVID-19 outreach platform for a local government organization, reaching 1M+ patients.",
+        ],
+      },
+    ],
+  },
+];
+
+export const otherExperience = [
+  {
+    title: "Program Director, Mentorship Program",
+    org: "Africode (nonprofit)",
+    dates: "Jan 2025 - Present",
+    detail: "Appointed by the CEO. 12 mentors and 36 mentees across 4 countries.",
+  },
+  {
+    title: "Reliability Engineer Intern",
+    org: "Comcast",
+    dates: "2018",
+    detail:
+      "Integrated React into a legacy codebase. Brought test coverage to 99% with RSpec and Selenium.",
+  },
+  {
+    title: "Software Engineer",
+    org: "Philadelphia Parking Authority",
+    dates: "2017",
+    detail:
+      "Redesigned a JavaScript UI. Python automation cut processing from days to minutes.",
+  },
+];
+
+export const services = [
+  {
+    title: "LLM features in your product",
+    body: "Adding AI to an app that already has users: the model calls, the APIs around them, and the interface people actually touch.",
+  },
+  {
+    title: "Guardrails and human review",
+    body: "Checks that catch bad or sensitive output before it ships, plus review flows that keep a person in control.",
+  },
+  {
+    title: "Agentic coding workflows",
+    body: "Setting up Claude Code and similar agents for large refactors and upgrades, with tests that prove nothing broke.",
+  },
+  {
+    title: "Front-end modernization",
+    body: "React upgrades, editor migrations, and build tooling that turns minutes into seconds.",
+  },
+];
+
+export const sideBuilds = [
+  {
+    title: "DuckBot",
+    body: "A Discord bot that answers questions and generates images with the OpenAI and Replicate APIs.",
+    stack: "Node.js, Discord.js, OpenAI, Replicate",
+    code: "https://github.com/Basseybd/discord-ai-bot",
+    live: "https://discord.com/oauth2/authorize?client_id=1326301765674598591",
+    liveLabel: "Add to Discord",
+  },
+  {
+    title: "EverStay",
+    body: "A home rental and booking app with listings, auth, and image hosting.",
+    stack: "Next.js, TypeScript, Prisma, MongoDB, NextAuth",
+    code: "https://github.com/Basseybd/EverStay",
+    live: "https://everstay.vercel.app/",
+    liveLabel: "Open the app",
+  },
+  // Add the weekend AI project here once it is live.
+];
+
+export const offTheClock = {
+  heading: "Off the clock",
+  body: [
+    "Outside of work, I host parties and throw events around New York, travel whenever I can, and never turn down a long dinner with friends. Weddings, cookouts, arcade nights: my camera comes to all of it.",
+    "If you want to see the photos I take, here you go.",
+  ],
+};
+
+export const photoCategories = ["Travel", "Nights out", "Portraits", "City"] as const;
+export type PhotoCategory = (typeof photoCategories)[number];
+
+export type Photo = {
+  slug: string;
+  width: number;
+  height: number;
+  title: string;
+  place: string;
+  category: PhotoCategory;
+  settings: string;
+  alt: string;
+  featured: boolean;
+};
+
+// Files live in public/photos as {slug}-640.webp, -1200.webp, -2400.webp.
+// Everything shot on a Fujifilm X100VI (23mm). Featured photos go in the
+// home page deck; all of them appear on /photos.
+export const photos: Photo[] = [
+  {
+    slug: "2026-two-lines",
+    width: 1600,
+    height: 2400,
+    title: "Two lines",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/5.6, 1/1800s, ISO 500",
+    alt: "Portrait in a crochet shirt holding two pink brick phones against a blue sky",
+    featured: true,
+  },
+  {
+    slug: "2026-notre-dame",
+    width: 1600,
+    height: 2400,
+    title: "Notre-Dame Basilica",
+    place: "Montréal, 2026",
+    category: "Travel",
+    settings: "f/2.0, 1/34s, ISO 1250",
+    alt: "The blue and gold nave of Notre-Dame Basilica in Montréal, a lone visitor walking up the aisle",
+    featured: true,
+  },
+  {
+    slug: "2026-crowned",
+    width: 1600,
+    height: 2400,
+    title: "Crowned",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/45s, ISO 500",
+    alt: "A friend in a gold party crown and leather jacket in a crowd lit pink and amber",
+    featured: true,
+  },
+  {
+    slug: "2026-luckys",
+    width: 1600,
+    height: 2400,
+    title: "Lucky’s",
+    place: "2026",
+    category: "City",
+    settings: "ISO 400",
+    alt: "A red storm sky over an elevated train line, with a glowing Lucky’s sign below",
+    featured: true,
+  },
+  {
+    slug: "2026-behind-the-decks",
+    width: 1600,
+    height: 2400,
+    title: "Behind the decks",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/34s, ISO 5000",
+    alt: "Two friends laughing behind a DJ booth in red light",
+    featured: true,
+  },
+  {
+    slug: "2026-transito",
+    width: 1600,
+    height: 2400,
+    title: "Tránsito",
+    place: "Old San Juan, 2026",
+    category: "Travel",
+    settings: "f/3.6, 1/180s, ISO 125",
+    alt: "A street violinist in an arched doorway on a red wall with a Tránsito sign",
+    featured: true,
+  },
+  {
+    slug: "2026-east-river",
+    width: 1600,
+    height: 2400,
+    title: "East River, blue hour",
+    place: "New York, 2026",
+    category: "City",
+    settings: "f/2.0, 1/34s, ISO 4000",
+    alt: "The Manhattan skyline at blue hour reflected in the East River",
+    featured: true,
+  },
+  {
+    slug: "2026-match-day",
+    width: 1600,
+    height: 2400,
+    title: "Match day",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.8, 1/120s, ISO 500",
+    alt: "A friend in a red striped soccer jersey grinning at a crowded watch party",
+    featured: true,
+  },
+  {
+    slug: "2026-midtown-sunset",
+    width: 1600,
+    height: 2400,
+    title: "Golden hour, Midtown",
+    place: "New York, 2026",
+    category: "City",
+    settings: "f/2.5, 1/105s, ISO 125",
+    alt: "Low sun burning down a Midtown street between towers",
+    featured: true,
+  },
+  {
+    slug: "2024-rainforest-lunch",
+    width: 1600,
+    height: 2400,
+    title: "Lunch in the rainforest",
+    place: "2024",
+    category: "Portraits",
+    settings: "f/2.5, 1/110s, ISO 500",
+    alt: "A friend in a cap and round glasses mid-bite of a sandwich against deep green leaves",
+    featured: true,
+  },
+  {
+    slug: "2024-el-yunque-window",
+    width: 1600,
+    height: 2400,
+    title: "Tower window",
+    place: "2024",
+    category: "Travel",
+    settings: "f/5.6, 1/1600s, ISO 500",
+    alt: "A stone arch window looking out on palms disappearing into fog",
+    featured: false,
+  },
+  {
+    slug: "2026-rose-window",
+    width: 1600,
+    height: 2400,
+    title: "Rose window",
+    place: "Montréal, 2026",
+    category: "Travel",
+    settings: "f/2.0, 1/34s, ISO 800",
+    alt: "Looking straight up at a glowing rose window in a starred ceiling",
+    featured: false,
+  },
+  {
+    slug: "2026-old-san-juan",
+    width: 1600,
+    height: 2400,
+    title: "The crew",
+    place: "Old San Juan, 2026",
+    category: "Travel",
+    settings: "f/3.2, 1/180s, ISO 125",
+    alt: "A group of friends walking single file down a sidewalk in Old San Juan",
+    featured: false,
+  },
+  {
+    slug: "2026-omakase",
+    width: 2400,
+    height: 1600,
+    title: "Omakase",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/34s, ISO 640",
+    alt: "Two pieces of sushi on ceramic plates at a dim counter, a single light above",
+    featured: false,
+  },
+  {
+    slug: "2026-gold",
+    width: 1600,
+    height: 2400,
+    title: "Gold",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/2.5, 1/110s, ISO 125",
+    alt: "Close-up of a wide smile with a single gold grill",
+    featured: false,
+  },
+  {
+    slug: "2026-low-light",
+    width: 1600,
+    height: 2400,
+    title: "Low light",
+    place: "2026",
+    category: "Portraits",
+    settings: "f/2.0, 1/20s, ISO 12800",
+    alt: "A friend smiling in warm, dim bar light",
+    featured: false,
+  },
+  {
+    slug: "2026-shoes-off",
+    width: 1600,
+    height: 2400,
+    title: "Shoes off",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/5s, ISO 12800",
+    alt: "A pair of lace-up flats left on the grass at dusk",
+    featured: false,
+  },
+  {
+    slug: "2026-cookout",
+    width: 1600,
+    height: 2400,
+    title: "Cookout",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/2.0, 1/60s, ISO 10000",
+    alt: "Friends around a flaming grill at night with the Manhattan skyline behind",
+    featured: false,
+  },
+  {
+    slug: "2026-pinball",
+    width: 1600,
+    height: 2400,
+    title: "Pinball",
+    place: "Barcade, 2026",
+    category: "Nights out",
+    settings: "f/3.6, 1/50s, ISO 400",
+    alt: "A friend in a striped shirt leaning into a pinball machine at an arcade bar",
+    featured: false,
+  },
+  {
+    slug: "2026-round-two",
+    width: 1600,
+    height: 2400,
+    title: "Round two",
+    place: "2026",
+    category: "Nights out",
+    settings: "f/3.6, 1/50s, ISO 400",
+    alt: "Two friends playing a vintage fighting game at an arcade cabinet",
+    featured: false,
+  },
+];
+
+export const photoSrc = (slug: string, size: 640 | 1200 | 2400) => `/photos/${slug}-${size}.webp`;
+export const photoSrcSet = (slug: string) =>
+  `${photoSrc(slug, 640)} 640w, ${photoSrc(slug, 1200)} 1200w, ${photoSrc(slug, 2400)} 2400w`;
+
+export const toolkit = [
+  {
+    group: "AI",
+    items: [
+      "Claude",
+      "LLM integration",
+      "Human-in-the-loop AI",
+      "AI guardrails",
+      "Claude Code",
+      "Windsurf",
+      "Copilot",
+    ],
+  },
+  { group: "Languages", items: ["TypeScript", "JavaScript", "Python", "SQL"] },
+  {
+    group: "Frontend",
+    items: [
+      "React",
+      "Next.js",
+      "Redux",
+      "React Router",
+      "Tailwind CSS",
+      "Chakra UI",
+      "Material UI",
+      "Tiptap",
+      "Rsbuild",
+    ],
+  },
+  {
+    group: "Backend",
+    items: [
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "OpenAPI",
+      "Prisma",
+      "Knex",
+      "MySQL",
+      "Redis",
+      "RabbitMQ",
+    ],
+  },
+  {
+    group: "Cloud",
+    items: [
+      "AWS Lambda",
+      "SQS",
+      "API Gateway",
+      "ECR",
+      "EKS",
+      "CloudWatch",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+    ],
+  },
+  {
+    group: "Testing",
+    items: ["Jest", "React Testing Library", "Selenium"],
+  },
+];
