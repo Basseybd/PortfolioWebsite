@@ -15,7 +15,7 @@ export const site = {
   instagramHandle: "@bassey.bd",
   photoArchive: "https://www.instagram.com/bassey.archive/",
   photoArchiveHandle: "@bassey.archive",
-  url: "https://www.basseyduke.io",
+  url: "https://basseyduke.io",
 };
 
 export const portrait = {
