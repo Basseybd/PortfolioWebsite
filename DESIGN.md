@@ -47,8 +47,7 @@ Never green UI. Never the old cream, terracotta, or burnt orange.
 
 - Display: Shippori Mincho 400/500 (`font-display`), including the door words.
 - Text: Zen Kaku Gothic New 400/500/700 (`font-sans`).
-- Data only (stacks, camera settings, counters, door numbers): Fragment Mono
-  (`font-mono`).
+- Data only (stacks, camera settings, counters): Fragment Mono (`font-mono`).
 - Preloader letters only: Saira Extra Condensed 800.
 - All fonts are self-hosted through Fontsource. Never load Google Fonts at runtime.
 
@@ -68,5 +67,7 @@ Never green UI. Never the old cream, terracotta, or burnt orange.
 - WebGL must fall back gracefully (show a CSS chrome sheen or the image).
 - Images come from `public/photos/{slug}-{640|1200|2400}.webp` via
   `photoSrc` / `photoSrcSet` in `lib/content.ts`. Always set width and height.
+- No eyebrows or kickers above headings, no 01 / 02 numbering unless the
+  content really is a sequence, no unicode arrows or emoji as icons (draw SVG).
 - Accessibility: visible focus, labelled controls, alt text from content.
 - Commit messages: no co-author trailers.

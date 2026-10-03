@@ -4,12 +4,16 @@ import { useEffect, useRef } from "react";
 
 export type OrbState = "idle" | "typing" | "thinking" | "done";
 
-const ENERGY: Record<OrbState, number> = { idle: 0.08, typing: 0.5, thinking: 1, done: 0.25 };
+const ENERGY: Record<OrbState, number> = { idle: 0.2, typing: 0.5, thinking: 1, done: 0.3 };
+// Extra energy while a mouse is close, so the orb notices you.
+const NEAR_BOOST = 0.16;
 
 const VERT = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
 
 // A liquid chrome sphere, like a drop of mercury or an Arco lamp shade.
 // It reflects a simple studio: bright sky, a dark horizon, graphite below.
+// At rest it floats and slowly turns, so the highlights slide across it; a
+// nearby cursor tilts the reflection toward itself.
 const FRAG = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
@@ -19,6 +23,7 @@ precision mediump float;
 uniform vec2 r;
 uniform float t;
 uniform float e;
+uniform vec2 m;
 
 float hash(vec2 p) {
   vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -37,6 +42,12 @@ float fbm(vec2 p) {
   return v;
 }
 
+mat2 rot(float a) {
+  float c = cos(a);
+  float s = sin(a);
+  return mat2(c, -s, s, c);
+}
+
 vec3 env(vec3 d) {
   float y = d.y;
   vec3 sky = mix(vec3(0.60, 0.64, 0.66), vec3(0.97, 0.98, 0.98), smoothstep(0.0, 0.85, y));
@@ -50,12 +61,14 @@ vec3 env(vec3 d) {
 }
 
 void main() {
-  vec2 uv = (gl_FragCoord.xy - 0.5 * r) / min(r.x, r.y);
+  vec2 uv0 = (gl_FragCoord.xy - 0.5 * r) / min(r.x, r.y);
+  float bob = 0.014 * sin(t * 0.7);
+  vec2 uv = uv0 - vec2(0.0, bob);
   float d = length(uv);
   float ang = atan(uv.y, uv.x);
 
   float wob = fbm(vec2(cos(ang), sin(ang)) * 1.4 + t * (0.2 + 0.7 * e));
-  float rad = 0.30 + 0.006 * sin(ang * 3.0 + t * 0.6) + (0.008 + 0.045 * e) * (wob - 0.5);
+  float rad = 0.30 + 0.008 * sin(ang * 3.0 + t * 0.6) + (0.012 + 0.05 * e) * (wob - 0.5);
   float body = smoothstep(rad, rad - 0.006, d);
 
   vec2 p = uv / rad;
@@ -66,13 +79,17 @@ void main() {
   n = normalize(n + vec3(fbm(q) - 0.5, fbm(q + 7.3) - 0.5, 0.0) * amt);
 
   vec3 rf = reflect(vec3(0.0, 0.0, -1.0), n);
+  rf.xz = rot(0.42 * sin(t * 0.21) + m.x * 0.7) * rf.xz;
+  rf.yz = rot(-m.y * 0.45) * rf.yz;
   vec3 col = env(rf);
   float fres = pow(1.0 - z, 2.5);
   col = mix(col, vec3(0.83, 0.85, 0.86), fres * 0.35);
 
-  // Soft contact shadow under the sphere.
-  float sy = uv.y + rad * 1.06;
-  float shadow = exp(-sy * sy / 0.0009) * exp(-uv.x * uv.x / (rad * rad * 0.55)) * 0.45;
+  // Soft contact shadow under the sphere. It stays put and tightens as the
+  // sphere dips toward it.
+  float sy = uv0.y + 0.30 * 1.06 + 0.014;
+  float lift = 1.0 - (bob + 0.014) / 0.028;
+  float shadow = exp(-sy * sy / 0.0009) * exp(-uv0.x * uv0.x / (rad * rad * (0.5 + 0.12 * (1.0 - lift)))) * (0.36 + 0.14 * lift);
 
   float alpha = max(body, shadow * (1.0 - body));
   vec3 outc = mix(vec3(0.20, 0.21, 0.22), col, body);
@@ -121,6 +138,7 @@ export default function ThinkingOrb({ state }: { state: OrbState }) {
     const uR = gl.getUniformLocation(prog, "r");
     const uT = gl.getUniformLocation(prog, "t");
     const uE = gl.getUniformLocation(prog, "e");
+    const uM = gl.getUniformLocation(prog, "m");
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
@@ -128,6 +146,25 @@ export default function ThinkingOrb({ state }: { state: OrbState }) {
     let last = performance.now();
     let time = 12;
     let energy = target.current;
+    // Cursor tilt, eased toward its target. Mouse only.
+    const tilt = { x: 0, y: 0, tx: 0, ty: 0, near: 0, tn: 0 };
+    const onPointer = (ev: PointerEvent) => {
+      if (ev.pointerType !== "mouse") return;
+      const b = canvas.getBoundingClientRect();
+      const cx = b.left + b.width / 2;
+      const cy = b.top + b.height / 2;
+      const dx = ev.clientX - cx;
+      const dy = ev.clientY - cy;
+      const reach = Math.max(260, b.width * 2.5);
+      tilt.tx = Math.max(-1, Math.min(1, dx / reach));
+      tilt.ty = Math.max(-1, Math.min(1, dy / reach));
+      tilt.tn = Math.max(0, 1 - Math.hypot(dx, dy) / reach);
+    };
+    const onLeave = () => {
+      tilt.tx = 0;
+      tilt.ty = 0;
+      tilt.tn = 0;
+    };
 
     const draw = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -141,6 +178,7 @@ export default function ThinkingOrb({ state }: { state: OrbState }) {
       gl.uniform2f(uR, w, h);
       gl.uniform1f(uT, time);
       gl.uniform1f(uE, energy);
+      gl.uniform2f(uM, tilt.x, tilt.y);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -149,8 +187,12 @@ export default function ThinkingOrb({ state }: { state: OrbState }) {
     const loop = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      energy += (target.current - energy) * Math.min(1, dt * 3);
-      time += dt * (0.5 + 2.2 * energy);
+      const k = Math.min(1, dt * 3);
+      tilt.x += (tilt.tx - tilt.x) * k;
+      tilt.y += (tilt.ty - tilt.y) * k;
+      tilt.near += (tilt.tn - tilt.near) * k;
+      energy += (target.current + tilt.near * NEAR_BOOST - energy) * k;
+      time += dt * (0.7 + 2.2 * energy);
       draw();
       raf = requestAnimationFrame(loop);
     };
@@ -174,12 +216,18 @@ export default function ThinkingOrb({ state }: { state: OrbState }) {
     });
     io.observe(canvas);
     document.addEventListener("visibilitychange", sync);
+    if (!reduce) {
+      window.addEventListener("pointermove", onPointer, { passive: true });
+      document.documentElement.addEventListener("pointerleave", onLeave);
+    }
     draw();
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
       document.removeEventListener("visibilitychange", sync);
+      window.removeEventListener("pointermove", onPointer);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 
